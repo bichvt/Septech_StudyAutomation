@@ -2,18 +2,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>auto.testing.webapp</groupId>
-	<artifactId>robot-web</artifactId>
+	<groupId>auto.septech</groupId>
+	<artifactId>auto-septech</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>Sample Serenity project using Cucumber and WebDriver</name>
 
 	<properties>
+		<maven.test.skip>true</maven.test.skip>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<serenity.version>1.1.14</serenity.version>
 		<serenity.cucumber.version>1.1.1</serenity.cucumber.version>
+		<log4j.version>1.2.17</log4j.version>
 		<webdriver.driver>firefox</webdriver.driver>
 	</properties>
 
@@ -26,19 +28,8 @@
 			<name>bintray</name>
 			<url>http://jcenter.bintray.com</url>
 		</repository>
-		<!--  
-		<repository>
-			<id>com.sikulix</id>
-			<name>com.sikulix</name>
-			<url>https://oss.sonatype.org/content/groups/public</url>
-			<layout>default</layout>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</snapshots>
-		</repository>
-		-->
 	</repositories>
+
 	<pluginRepositories>
 		<pluginRepository>
 			<snapshots>
@@ -88,23 +79,6 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.35</version>
 		</dependency>
-		<!--  
-		<dependency>
-			<groupId>org.sikuli</groupId>
-			<artifactId>sikuli-core</artifactId>
-			<version>1.2.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.sikuli</groupId>
-			<artifactId>sikuli-api</artifactId>
-			<version>1.2.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.sikulix</groupId>
-			<artifactId>sikulixapi</artifactId>
-			<version>1.1.0-SNAPSHOT</version>
-		</dependency>
-		-->
 		<!-- read write file -->
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -122,16 +96,19 @@
 			<artifactId>cucumber-reports</artifactId>
 			<version>0.0.2</version>
 		</dependency>
-
-		<dependency>
-			<groupId>info.cukes</groupId>
-			<artifactId>cucumber-testng</artifactId>
-			<version>1.2.2</version>
-		</dependency>
+		<!-- <dependency> <groupId>info.cukes</groupId> <artifactId>cucumber-testng</artifactId> 
+			<version>1.2.2</version> </dependency> -->
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-junit</artifactId>
 			<version>1.2.2</version>
+		</dependency>
+
+		<!-- log4j -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -142,24 +119,21 @@
 				<version>2.18.1</version>
 				<configuration>
 					<skip>true</skip>
+					<runOrder>alphabetical</runOrder>
 				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-failsafe-plugin</artifactId>
 				<version>2.18.1</version>
 				<configuration>
-					<excludes>
-						<exclude>**/AllFeatureGenerationTest.java</exclude>
-					</excludes>
 					<includes>
-						<include>**/*Test.java</include>
-						<include>**/*TestSuite.java</include>
-						<include>**/Test*.java</include>
-						<include>**/When*.java</include>
+						<include>**/AllFeatureCreateTestCaseOnTestLink.java</include>
+						<include>**/*Test*.java</include>
 					</includes>
 					<argLine>-Xmx512m</argLine>
 					<systemPropertyVariables>
 						<webdriver.driver>${webdriver.driver}</webdriver.driver>
+						<runOrder>alphabetical</runOrder>
 					</systemPropertyVariables>
 				</configuration>
 				<executions>
@@ -176,8 +150,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.2</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
 			</plugin>
 			<plugin>
