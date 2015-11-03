@@ -73,7 +73,8 @@ public class ObjectMap {
 			//Get current working directory
 			String workingDir=System.getProperty("user.dir");
 			//Get object map file
-			fs = new FileInputStream(workingDir +fseparator+"elementobjects"+ fseparator + fileName);
+			fs = new FileInputStream(workingDir +fseparator+"objects"+ fseparator + fileName);
+			TestLogger.info(fs);
 			properties = new Properties();
 			properties.load(fs);
 

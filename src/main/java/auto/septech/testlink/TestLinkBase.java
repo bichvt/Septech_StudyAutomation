@@ -351,7 +351,10 @@ public class TestLinkBase {
 								+"/"
 								+fileName+".feature")
 								.replace("/", fs).replace("\\", fs));
-						stringBuilder.append("\n"+CucumberUtil.processSpecialString(CucumberUtil.addCucumberString(CucumberUtil.processSpecialString(backGround))));
+						if(backGround.toLowerCase().contains("background:"))
+							stringBuilder.append("\n"+CucumberUtil.processSpecialString(CucumberUtil.addCucumberString(CucumberUtil.processSpecialString(backGround))));
+						else
+							stringBuilder.append("\n"+"Background:"+"\n"+CucumberUtil.processSpecialString(CucumberUtil.addCucumberString(CucumberUtil.processSpecialString(backGround))));
 						ArrayList<TestCase> testCase = getTestCase(api,suiteId); 
 						for(int k = 0; k<testCase.size(); k++){
 							if(testCase.get(k).getExecutionType().getValue()==2){
@@ -708,19 +711,19 @@ public class TestLinkBase {
 					if(getTestCase(api,suiteId).size()>0)
 					{
 						TestLogger.info("generate element repository file");
-						StringBuilder stringBuilder = new StringBuilder();
 						ArrayList<TestCase> testCase = getTestCase(api,suiteId); 
 						for(int k = 0; k<testCase.size(); k++){
+							StringBuilder stringBuilder = new StringBuilder();
 							String caseName = testCase.get(k).getName().trim().replace(" ", "");
 							String caseSummary = testCase.get(k).getSummary();
-									File f = new File((pathFile+"objects/"
+							File f = new File((pathFile+"objects/"
 									+caseName+".properties")
 									.replace("/", fs).replace("\\", fs)); 
 							stringBuilder .append(caseSummary);
-							FileUtils.writeStringToFile(f, stringBuilder.toString());
+							FileUtils.writeStringToFile(f, stringBuilder.toString(),"UTF-8");
 						}
 
-						
+
 					}
 				} 
 			}
