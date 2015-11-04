@@ -63,6 +63,11 @@ public class MainActionFormSteps {
 		mainActionFormSteps.press_enter_key();
 	}
 
+	@When("^click on the element \"([^\"]*)\"$")
+	public void click_on_the_element(String target) throws Throwable {
+		mainActionFormSteps.click_on_the_element(target);
+	}
+	
 	@When("^click on the \"([^\"]*)\"$")
 	public void click_on_the(String target) throws Throwable {
 		mainActionFormSteps.click_on_the_element(target);
