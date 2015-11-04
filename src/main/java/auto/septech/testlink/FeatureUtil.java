@@ -83,10 +83,11 @@ public class FeatureUtil {
 					if(tempLine.toLowerCase().contains("scenario")){
 						break;
 					}
-					bground.append("<br>");
+					//bground.append("<br>");
 					bground.append(tempLine);
-					bground.append("</br>");
-					bground.append(System.lineSeparator());
+					bground.append("\n");
+					//bground.append("</br>");
+					//bground.append(System.lineSeparator());
 					tempLine = tempbr.readLine();
 					line = br.readLine();
 				}
@@ -99,10 +100,11 @@ public class FeatureUtil {
 					if(tempLine.toLowerCase().contains("scenario")){
 						break;
 					}
-					tcaseSummary.append("<br>");
+					//tcaseSummary.append("<br>");
 					tcaseSummary.append(tempLine);
-					tcaseSummary.append("</br>");
-					tcaseSummary.append(System.lineSeparator());
+					tcaseSummary.append("\n");
+					//tcaseSummary.append("</br>");
+					//tcaseSummary.append(System.lineSeparator());
 					tempLine = tempbr.readLine();
 					line = br.readLine();
 				}
