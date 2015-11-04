@@ -90,6 +90,16 @@ public class VerificationSteps {
 		verificationSteps.the_page_should_not_contain(value);
 	}
 	
+	@Then("^the page should contain variable \"(.*?)\"$")
+	public void the_page_should_contain_variable(String var) throws Throwable {
+		verificationSteps.the_page_should_contain_variable(var);
+	}
+
+	@Then("^the page should not contain variable \"(.*?)\"$")
+	public void the_page_should_not_contain_variable(String var) throws Throwable {
+		verificationSteps.the_page_should_not_contain_variable(var);
+	}
+	
 	@Then("^the \"(.*?)\" attribute of \"(.*?)\" should contain variable \"(.*?)\"$")
 	public void the_attribute_of_element_should_contain_variable(String attribute, String element, String var) throws Throwable {
 		verificationSteps.the_attribute_of_element_should_contain_variable(attribute,element,var);

@@ -59,6 +59,16 @@ public class VerificationBaseSteps extends EndUserBaseSteps {
 	}
 	
 	@Step
+	public void the_page_should_contain_variable(String var) {
+		assertThat(pageCore.containsText(listVar.get(var)),is(true));
+	}
+
+	@Step
+	public void the_page_should_not_contain_variable(String var) {
+		assertThat(pageCore.getDriver().getPageSource().contains(listVar.get(var)),is(false));
+	}
+	
+	@Step
 	public void the_text_of_field_should_contain_variable(String element, String var) {
 		TestLogger.info(listVar.get(var));
 		assertThat(pageCore.getCurrentTextOfElement(element),containsString(listVar.get(var)));
