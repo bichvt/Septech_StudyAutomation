@@ -14,9 +14,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.MoveTargetOutOfBoundsException;
 
 import auto.septech.utilities.TestLogger;
-
+import org.openqa.selenium.JavascriptExecutor;
 public class CoreActionForm extends PageCore {
-	
+
 	/*********checkbox/radio button********************/
 	/**
 	 * check checkbox
@@ -59,7 +59,7 @@ public class CoreActionForm extends PageCore {
 	public void selectIndexFromDropDownList(int indexOption, String element) {
 		element(getWebElement(element)).selectByIndex(indexOption);
 	}
-	
+
 	/**
 	 * select value from drop down list by visible text
 	 * @param textOption
@@ -68,7 +68,7 @@ public class CoreActionForm extends PageCore {
 	public void selectTextFromDropDownList(String textOption, String element) {
 		element(getWebElement(element)).selectByVisibleText(textOption);
 	}
-	
+
 	/**
 	 * select multi value
 	 * @param listOption
@@ -89,17 +89,37 @@ public class CoreActionForm extends PageCore {
 			}
 		}
 	}
-	
+
 	/**********click action***********************/
+	/**
+	 * click by javascript
+	 */
+	public void clickByJavascript(String element){
+		WebElement onElement = element(getWebElement(element));
+		((JavascriptExecutor)getDriver()).executeScript("arguments[0].click();", onElement);
+	}
+
+	/**
+	 * press enter key
+	 */
 	public void pressEnterKey(){
 		Actions action=new Actions(getDriver());
 		action.sendKeys(Keys.ENTER).perform();
 		action.release();
 	}
-	
+
+	/**
+	 * click on Element
+	 * @param element
+	 */
 	public void clickOnElement(String element){
 		WebElement onElement = element(getWebElement(element));
-		onElement.click();
+		if(!onElement.isEnabled()){
+			TestLogger.info("click by javascript");
+			clickByJavascript(element);
+		}
+		else
+			onElement.click();
 	}
 	/**
 	 * double click on element
@@ -109,7 +129,7 @@ public class CoreActionForm extends PageCore {
 		WebElement onElement = element(getWebElement(element));
 		withAction().doubleClick(onElement).perform();
 	}
-	
+
 	/**
 	 * right click
 	 * @param element
@@ -129,7 +149,7 @@ public class CoreActionForm extends PageCore {
 		Action drag = builder.clickAndHold(elementToMove).build();
 		drag.perform();
 	}
-	
+
 	/**
 	 * right click and select index
 	 * @param element
@@ -143,12 +163,12 @@ public class CoreActionForm extends PageCore {
 			for(int i=1;i<=indexItem;i++){
 				action.sendKeys(Keys.ARROW_DOWN);
 			}
-				action.sendKeys(Keys.ENTER).perform();
+			action.sendKeys(Keys.ENTER).perform();
 		} catch (MoveTargetOutOfBoundsException e) {
-		e.getStackTrace();
+			e.getStackTrace();
 		}
 	}
-	
+
 	/**
 	 * click at coordinates
 	 * @param element
@@ -198,12 +218,12 @@ public class CoreActionForm extends PageCore {
 			for(int i=1;i<=indexItem;i++){
 				action.sendKeys(Keys.ARROW_DOWN);
 			}
-				action.sendKeys(Keys.ENTER).perform();
+			action.sendKeys(Keys.ENTER).perform();
 		} catch (MoveTargetOutOfBoundsException e) {e.getStackTrace();}
 	}
-	
 
-	
+
+
 	/********mouse over actions*************/
 	/**
 	 * drag and drop
@@ -214,10 +234,10 @@ public class CoreActionForm extends PageCore {
 	 * @throws AWTException
 	 */
 	public void dragAndDropElementHtml(String resouce, String des, int xOffset, int yOffset) throws AWTException{
-		
+
 		WebElement dragFrom = getWebElement(resouce);
 		WebElement dragTo = getWebElement(des);
-		
+
 		// Setup robot
 		Robot robot = new Robot();
 		robot.setAutoDelay(500);
@@ -241,7 +261,7 @@ public class CoreActionForm extends PageCore {
 		toLocation.y += yOffset + yCentreTo;
 		fromLocation.x += xOffset + xCentreFrom;
 		fromLocation.y += yOffset + yCentreFrom;
-		
+
 		TestLogger.info(fromLocation.toString());
 
 		//Move mouse to drag from location
@@ -255,7 +275,7 @@ public class CoreActionForm extends PageCore {
 		//Drop
 		robot.mouseRelease(InputEvent.BUTTON1_MASK);
 	}
-	
+
 	/**
 	 * drag and drop
 	 * @param resouce
@@ -267,7 +287,7 @@ public class CoreActionForm extends PageCore {
 		Actions builder = new Actions(getDriver());
 		Action drag = builder.clickAndHold(elementToMove).build();
 		drag.perform();
-		
+
 		WebElement moveToElement = getWebElement(dest);
 		Actions builder2 = new Actions(getDriver());
 		Action dragAndDrop = builder2.moveToElement(moveToElement).release(moveToElement).build();
@@ -280,7 +300,7 @@ public class CoreActionForm extends PageCore {
 	 */
 	public void moveMouse(String element) {
 		WebElement moveToElement = getWebElement(element);
-		
+
 		Actions builder = new Actions(getDriver());
 		Action dragAndDrop = builder.moveToElement(moveToElement).release(moveToElement).build();
 		dragAndDrop.perform();
@@ -294,7 +314,7 @@ public class CoreActionForm extends PageCore {
 	 */
 	public void moveMouseToAtCoordinates(String element, int xOffset, int yOffset) {
 		WebElement moveToElement = getWebElement(element);
-		
+
 		Actions builder = new Actions(getDriver());
 		Action dragAndDrop = builder.moveToElement(moveToElement,xOffset,yOffset).release(moveToElement).build();
 		dragAndDrop.perform();

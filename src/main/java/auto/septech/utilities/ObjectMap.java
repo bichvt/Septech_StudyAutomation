@@ -1,9 +1,11 @@
 package auto.septech.utilities;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Properties;
@@ -36,7 +38,7 @@ public class ObjectMap {
 	 * @throws IOException
 	 */
 	public static Properties loading_object_properties_from_package(String objectRepos){
-		FileInputStream fs = null;
+		BufferedReader fs = null;
 		properties = new Properties();
 		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 		URL url = classLoader.getResource(objectRepos);
@@ -45,8 +47,10 @@ public class ObjectMap {
 			if (folder.isDirectory()) {
 				File[] files = folder.listFiles();
 				for (File file : files) {
-					fs = new FileInputStream(file);
-					properties.load(fs);
+					fs = new BufferedReader(
+				            new InputStreamReader(
+				                       new FileInputStream(file), "UTF8"));
+					properties.load(fs);					
 				}
 			}
 		} catch (URISyntaxException e) {

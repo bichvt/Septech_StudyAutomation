@@ -30,7 +30,9 @@ public class PageCore extends PageObject {
 	public static Properties properties;
 
 	String defaultWindow="";
-
+	public PageCore() {
+		properties = ObjectMap.loading_object_properties_from_package("objects");
+	}
 	/**
 	 * maximize page
 	 */
@@ -45,7 +47,6 @@ public class PageCore extends PageObject {
 	public void openThePage(){
 		maximizeBrowser();
 		open();
-		properties = ObjectMap.loading_object_properties_from_package("objects");
 	}
 	
 	/**

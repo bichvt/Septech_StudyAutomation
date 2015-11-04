@@ -20,11 +20,13 @@ public class WindowAndFrameBaseSteps extends EndUserBaseSteps {
     @Step
 	public void open_the(String url) {
     	pageCore.openAt(pageCore.getActualValueFromObjectRepository(url));
+    	maximize_the_window();
 	}
     
     @Step
 	public void navigate_to(String url) {
     	windowsAndFrames.navigateToUrl(pageCore.getActualValueFromObjectRepository(url));
+    	maximize_the_window();
 	}
     
 	@Step

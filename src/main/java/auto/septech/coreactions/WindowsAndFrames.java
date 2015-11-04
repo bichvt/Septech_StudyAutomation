@@ -47,6 +47,7 @@ public class WindowsAndFrames extends PageCore{
 	 * @param url
 	 */
 	public void navigateToUrl(String url) {
+		maximizeWindows();
 		getDriver().navigate().to(url);
 	}
 
@@ -73,6 +74,7 @@ public class WindowsAndFrames extends PageCore{
 	 * @param url
 	 */
 	public void openPageOnNewWindow(String url) {
+		maximizeWindows();
 		defaultWindow = getDriver().getWindowHandle();
 		TestLogger.info(url);
 		evaluateJavascript("window.open('"+url+"', 'myD', 'fullscreen=yes');");

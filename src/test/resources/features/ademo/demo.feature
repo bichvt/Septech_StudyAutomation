@@ -1,6 +1,6 @@
 Feature: autoseptech demo
 Background:
-	When open the home page
+	#When open the home page
 	When open "demo.url" in new window and switch to it
 	When open the "demo.registurl"
 	When close current window

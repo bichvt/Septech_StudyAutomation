@@ -125,6 +125,7 @@ public class CucumberUtil {
 				.replace("When Then", "Then")
 				.replace("When And", "And")
 				.replace("When Background", "Background")
+				.replace("open the homepage", "open the home page")
 				.replaceAll("[\\\r\\\n]+", "\n")
 				.replaceAll("[\n\r]+", "\n");
 		return retString;
