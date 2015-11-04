@@ -3,6 +3,10 @@ package auto.septech.scenariosteps;
 import auto.septech.steps.DialogAndAlertBaseSteps;
 import auto.septech.steps.EndUserBaseSteps;
 import auto.septech.steps.FileActionBaseSteps;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+
 import auto.septech.steps.CoreActionFormBaseSteps;
 import auto.septech.steps.VerificationBaseSteps;
 import auto.septech.steps.WindowAndFrameBaseSteps;
@@ -263,5 +267,11 @@ public class VerificationSteps {
 	@Then("^the variable \"([^\"]*)\" should not contain variable \"([^\"]*)\"$")
 	public void the_variable_should_not_contain_variable(String var1, String var2) throws Throwable {
 		verificationSteps.the_variable1_not_contain_variable2(var1,var2);
+	}
+	
+	@Then("^the number of \"([^\"]*)\" element should be (\\d+)$")
+	public void the_number_of_element_should_be(String element, int number) {
+		Integer numberResult = endUser.get_number_of_element(element);
+		assertThat(number,equalTo(numberResult));
 	}
 }

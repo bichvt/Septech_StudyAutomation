@@ -114,4 +114,30 @@ public class EndUserBaseSteps extends ScenarioSteps {
 		listVar.put(var, text);
 		TestLogger.info(listVar.get(var));
 	}
+	
+	@Step
+	public Integer get_number_of_element(String element){
+		return pageCore.getWebElements(element).size();
+	}
+	
+	@Step
+	public void store_number_in_value_of_element_in_variable(String element, String var){
+		String value = pageCore.getWebElement(element).getText();
+		String number = pageCore.getNumberInString(value);
+		listVar.put(var, String.valueOf(number));
+		TestLogger.info(listVar.get(var));
+	}
+	
+	@Step
+	public void store_number_in_string_in_variable(String value, String var){
+		String number = pageCore.getNumberInString(value);
+		listVar.put(var, String.valueOf(number));
+		TestLogger.info(listVar.get(var));
+	}
+
+	
+	@Step
+	public String get_number_in_string(String value){
+		return pageCore.getNumberInString(value);
+	}
 }

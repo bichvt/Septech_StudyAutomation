@@ -37,7 +37,22 @@ public class OtherBaseSteps {
 	public void wait_for_seconds(int time) throws Throwable {
 	   Thread.sleep(time*1000);
 	}
-   
+	
+	@When("^store the number in value of element \"(.*?)\" in \"(.*?)\" variable$")
+	public void store_the_number_in_value_of_element_in_variable(String element, String var) {
+		endUser.store_number_in_value_of_element_in_variable(element,var);
+	}
+	
+	@When("^store the number in string \"(.*?)\" in \"(.*?)\" variable$")
+	public void store_the_number_in_string_in_variable(String element, String var) {
+		endUser.store_number_in_string_in_variable(element,var);
+	}
+	
+	@When("^store the number of element \"(.*?)\" in \"(.*?)\" variable$")
+	public void store_the_number_of_element_in_variable(String element, String var) {
+		endUser.store_number_of_element_in_variable(element,var);
+	}
+	
     @When("^store the text of \"(.*?)\" element in \"(.*?)\" variable$")
     public void store_the_text_of_element_in_variable(String element, String var) throws Throwable {
     	endUser.store_the_text_of_element_in_variable(element,var);

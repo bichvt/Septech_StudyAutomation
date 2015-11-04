@@ -315,4 +315,14 @@ public class PageCore extends PageObject {
 		evaluateJavascript("arguments[0].setAttribute('style', arguments[1]);", webElement,
 				"color: red; border: 3px solid red;");
 	}
+	
+	/**
+	 * get number in string
+	 * @param value
+	 * @return
+	 */
+	public String getNumberInString(String value){
+		String numberOnly= value.replaceAll("[^0-9.]", "");
+		return numberOnly;
+	}
 }
