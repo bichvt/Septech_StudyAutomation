@@ -181,9 +181,10 @@ public class CucumberUtil {
 	 * @throws IOException
 	 */
 	public static void copyDirectoryToDirectory(File source, File dest) throws IOException {
-		FileUtils.copyDirectory(source, dest);
+		if(source.exists())
+			FileUtils.copyDirectory(source, dest);
 	}
-	
+
 	/**
 	 * copy file
 	 * @param source
@@ -191,7 +192,8 @@ public class CucumberUtil {
 	 * @throws IOException
 	 */
 	public static void copyFileToDirectory(File source, File dest) throws IOException {
-		FileUtils.copyFileToDirectory(source, dest);
+		if(source.exists())
+			FileUtils.copyFileToDirectory(source, dest);
 	}
 
 	/**
@@ -201,7 +203,8 @@ public class CucumberUtil {
 	 * @throws IOException
 	 */
 	public static void moveFileToDirectory(File source, File dest) throws IOException {
-		FileUtils.moveToDirectory(source, dest, true);
+		if(source.exists())
+			FileUtils.moveToDirectory(source, dest, true);
 	}
 
 	/**
