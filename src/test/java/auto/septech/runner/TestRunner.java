@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
-features={"src/test/resources/features/manageclient/"},
+features={"src/test/resources/features/"},
 glue="auto.septech.scenariosteps",
 //tags = { "@Test" },
 format={"pretty","junit:target/cucumber.xml"
