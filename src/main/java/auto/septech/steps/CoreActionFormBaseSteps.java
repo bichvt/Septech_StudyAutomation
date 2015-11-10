@@ -13,7 +13,7 @@ import auto.septech.coreactions.PageCore;
 import auto.septech.coreactions.WindowsAndFrames;
 import auto.septech.utilities.RandomData;
 import auto.septech.utilities.TestLogger;
-
+import auto.septech.utilities.ObjectMap;
 public class CoreActionFormBaseSteps extends EndUserBaseSteps {
 	/* 
 	 */
@@ -101,8 +101,15 @@ public class CoreActionFormBaseSteps extends EndUserBaseSteps {
 	}
 	
 	@Step
-	public void click_on_the_text(String industryName) {
-		pageCore.$("//*[text()="+industryName+"]").click();
+	public void click_on_the_text(String text) {
+		pageCore.$("//*[text()="+text+"]").click();
+	}
+	
+	@Step
+	public void click_on_the_element_with_variable(String element, String var) throws Exception {
+		System.out.println(ObjectMap.getLocatorString(element)+"[text()='"+listVar.get(var)+"']");
+		WebElement webElement = getDriver().findElement(pageCore.getObject(ObjectMap.getLocatorString(element)+"[text()='"+listVar.get(var)+"']"));
+		pageCore.clickOn(webElement);
 	}
     
 	@Step

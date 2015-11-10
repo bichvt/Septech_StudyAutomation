@@ -25,4 +25,14 @@ public class FileActionBaseSteps extends EndUserBaseSteps {
 	public void upload_file_using_javascript(String element, String pathFile) throws InterruptedException {
     	manageFileAction.uploadFileUsingJavascript(element,pathFile);
 	}
+    
+	@Step
+	public Integer get_height_of_image(String path){
+		return manageFileAction.getHeightImage(path);
+	}
+
+	@Step
+	public Integer get_width_of_image(String path){
+		return manageFileAction.getWidthImage(path);
+	}
 }

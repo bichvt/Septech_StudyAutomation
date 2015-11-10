@@ -107,7 +107,7 @@ public class PageCore extends PageObject {
 	 * @param locator
 	 * @return
 	 */
-	public static By getObject(String locator) {
+	public By getObject(String locator) {
 		By by = null;
 		try {
 			if (locator.startsWith("id=")) {
@@ -132,6 +132,9 @@ public class PageCore extends PageObject {
 
 			} else if (locator.startsWith("xpath=")) {
 				locator = locator.substring(6);
+				by = By.xpath(locator);
+			}
+			else{
 				by = By.xpath(locator);
 			}
 

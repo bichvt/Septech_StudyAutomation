@@ -13,7 +13,18 @@ import java.util.Properties;
 public class ObjectMap {
 	static Properties properties;
 	static String fseparator = File.separator;
-
+	
+	/**
+	 * Get locator string from element properties
+	 * @param ElementName
+	 * @return
+	 * @throws Exception
+	 */
+	public static String getLocatorString(String ElementName) throws Exception {
+		//Read value using the logical name as Key
+		String locator = properties.getProperty(ElementName);
+		return locator.substring(locator.indexOf("=")+1);
+	}
 
 	/**
 	 * Get locator string from element properties

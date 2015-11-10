@@ -268,4 +268,10 @@ public class VerificationBaseSteps extends EndUserBaseSteps {
 	public void the_variable1_not_contain_variable2(String var1, String var2) {
 		assertThat(listVar.get(var1),not(containsString(listVar.get(var2))));
 	}
+	
+	@Step
+	public void the_variable_should_be_equal_variable_plus(String arg1, String arg2, int arg3){
+	    // Write code here that turns the phrase above into concrete actions
+		assertThat(Integer.valueOf(listVar.get(arg1)),equalTo(Integer.valueOf(listVar.get(arg2))+arg3));
+	}
 }

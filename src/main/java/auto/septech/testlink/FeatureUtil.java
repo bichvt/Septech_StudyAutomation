@@ -29,6 +29,7 @@ public class FeatureUtil {
 		File folder = new File(path);
 		ArrayList<String> fileName=new ArrayList<String>();
 		if(folder.isFile()){
+			TestLogger.info("root folder is file");
 			fileName.add(path.replace("/", fs).replace("\\", fs));
 		}
 		else{
@@ -37,10 +38,21 @@ public class FeatureUtil {
 					temp = fileEntry.getName();
 					if ((temp.substring(temp.lastIndexOf('.') + 1, temp.length()).toLowerCase()).equals("feature")){
 						tempFile = folder.getAbsolutePath()+ "/" + fileEntry.getName();
-						TestLogger.info(tempFile);
 						fileName.add(tempFile.replace("/", fs).replace("\\", fs));
 					}
 					tempFile="";
+				}
+				else{
+					for (File fileEntry1 : fileEntry.listFiles()) {
+						if (fileEntry1.isFile()) {
+							temp = fileEntry1.getName();
+							if ((temp.substring(temp.lastIndexOf('.') + 1, temp.length()).toLowerCase()).equals("feature")){
+								tempFile = fileEntry.getAbsolutePath()+ "/" + fileEntry1.getName();
+								fileName.add(tempFile.replace("/", fs).replace("\\", fs));
+							}
+							tempFile="";
+						}
+					}
 				}
 
 			}
@@ -55,6 +67,7 @@ public class FeatureUtil {
 	 * @throws IOException
 	 */
 	public static void readFile(String filename) throws FileNotFoundException, IOException{
+		TestLogger.info("read file "+filename);
 		String fs = File.separator;
 		br = new BufferedReader(new FileReader(filename.replace("/", fs).replace("\\", fs)));
 		tempbr = new BufferedReader(new FileReader(filename.replace("/", fs).replace("\\", fs)));
@@ -69,25 +82,31 @@ public class FeatureUtil {
 		String line = br.readLine();
 		String tempLine = tempbr.readLine();
 		tempLine = tempbr.readLine();
-		while (line != null) {
+		while (line!=null) {
 			if(line.toLowerCase().contains("feature")){
 				//Get feature
 				fture.append(line);
 				fture.append(System.lineSeparator());
+				TestLogger.info(fture.toString().substring(fture.toString().indexOf(":")+1).trim());
 			}
 			if(line.toLowerCase().contains("background")){
 				//Get background
 				bground.append(line);
 				bground.append(System.lineSeparator());
-				while(tempLine != null){
+				while (tempLine!=null) {
 					if(tempLine.toLowerCase().contains("scenario")){
 						break;
 					}
-					//bground.append("<br>");
-					bground.append(tempLine);
-					bground.append("\n");
-					//bground.append("</br>");
-					//bground.append(System.lineSeparator());
+					if(!tempLine.toLowerCase().contains("#case id")&&!tempLine.toLowerCase().contains("#case name")){
+						tempLine=tempLine.trim();
+						if(tempLine.length()!=0){
+							//bground.append("<br>");
+							bground.append(tempLine);
+							bground.append("\n");
+							//bground.append("</br>");
+							//bground.append(System.lineSeparator());
+						}
+					}
 					tempLine = tempbr.readLine();
 					line = br.readLine();
 				}
@@ -96,15 +115,20 @@ public class FeatureUtil {
 				//get test case
 				tcase.append(line);
 				tcase.append(System.lineSeparator());
-				while(tempLine != null){
+				while (tempLine!=null) {
 					if(tempLine.toLowerCase().contains("scenario")){
 						break;
 					}
-					//tcaseSummary.append("<br>");
-					tcaseSummary.append(tempLine);
-					tcaseSummary.append("\n");
-					//tcaseSummary.append("</br>");
-					//tcaseSummary.append(System.lineSeparator());
+					if(!tempLine.toLowerCase().contains("#case id")&&!tempLine.toLowerCase().contains("#case name")){
+						tempLine=tempLine.trim();
+						if(tempLine.length()!=0){
+							//tcaseSummary.append("<br>");
+							tcaseSummary.append(tempLine);
+							tcaseSummary.append("\n");
+							//tcaseSummary.append("</br>");
+							//tcaseSummary.append(System.lineSeparator());
+						}
+					}
 					tempLine = tempbr.readLine();
 					line = br.readLine();
 				}
@@ -120,5 +144,6 @@ public class FeatureUtil {
 		}
 		background=bground.toString();
 		feature=fture.toString().substring(fture.toString().indexOf(":")+1).trim();
+		TestLogger.info("finish read file");
 	}
 }

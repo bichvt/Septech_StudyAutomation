@@ -284,4 +284,9 @@ public class VerificationSteps {
 		Integer numberResult = endUser.get_number_of_element(element);
 		assertThat(number,equalTo(numberResult));
 	}
+	
+	@Then("^the variable \"([^\"]*)\" should be equal variable \"([^\"]*)\" plus (\\d+)$")
+	public void the_variable_should_be_equal_variable_plus(String arg1, String arg2, int arg3) throws Throwable {
+		verificationSteps.the_variable_should_be_equal_variable_plus(arg1,arg2,arg3);
+	}
 }

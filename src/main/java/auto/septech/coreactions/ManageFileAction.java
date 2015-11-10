@@ -4,7 +4,10 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
+
+import javax.imageio.ImageIO;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -61,5 +64,43 @@ public class ManageFileAction extends PageCore{
 		((JavascriptExecutor) getDriver()).executeScript("arguments[0].style.display = 'block';", elem);
 		elem.sendKeys(fileLocation);
 		Thread.sleep(5000);
+	}
+	
+	/**
+	 * get height of image
+	 * @param path
+	 * @return
+	 */
+	public Integer getHeightImage(String path) {
+		String fs = File.separator;
+		path=System.getProperty("user.dir")+path.replace("/", fs).replace("\\", fs);
+		BufferedImage readImage = null;
+		Integer height=null;
+		try {
+			readImage = ImageIO.read(new File(path));
+			height = readImage.getHeight();
+		} catch (Exception e) {
+			readImage = null;
+		}
+		return height;
+	}
+
+	/**
+	 * get width of image
+	 * @param path
+	 * @return
+	 */
+	public Integer getWidthImage(String path) {
+		String fs = File.separator;
+		path=System.getProperty("user.dir")+path.replace("/", fs).replace("\\", fs);
+		BufferedImage readImage = null;
+		Integer width=null;
+		try {
+			readImage = ImageIO.read(new File(path));
+			width = readImage.getWidth();
+		} catch (Exception e) {
+			readImage = null;
+		}
+		return width;
 	}
 }

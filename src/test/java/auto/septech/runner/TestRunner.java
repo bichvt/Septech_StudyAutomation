@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
 features={"src/test/resources/features/"},
 glue="auto.septech.scenariosteps",
-//tags = { "@Test" },
+//tags = {"@Test"},
 format={"pretty","junit:target/cucumber.xml"
 		,"html:target"
 		,"json:target/cucumber.json"})

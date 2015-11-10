@@ -38,6 +38,11 @@ public class OtherBaseSteps {
 	   Thread.sleep(time*1000);
 	}
 	
+	@When("^store the number in text of element \"(.*?)\" in \"(.*?)\" variable$")
+	public void store_the_number_in_text_of_element_in_variable(String element, String var) {
+		endUser.store_number_in_text_of_element_in_variable(element,var);
+	}
+	
 	@When("^store the number in value of element \"(.*?)\" in \"(.*?)\" variable$")
 	public void store_the_number_in_value_of_element_in_variable(String element, String var) {
 		endUser.store_number_in_value_of_element_in_variable(element,var);

@@ -27,7 +27,7 @@ public class MainActionFormSteps {
 
 	@Steps
 	WindowAndFrameBaseSteps windowsAndFramesSteps;
-	
+
 	@When("^enter into the \"([^\"]*)\" field with value of variable \"([^\"]*)\"$")
 	public void enter_into_the_field_with_variable(String target, String var) throws Throwable {
 		mainActionFormSteps.enter_into_the_field_with_variable(target,var);
@@ -37,10 +37,10 @@ public class MainActionFormSteps {
 	public void enter_into_the_field_with(String target, String value) throws Throwable {
 		mainActionFormSteps.enter_into_the_field_with_value(target,value);
 	}
-	
-    @When("^enter into the \"([^\"]*)\" field with value \"([^\"]*)\" and store into variable \"([^\"]*)\"$")
+
+	@When("^enter into the \"([^\"]*)\" field with value \"([^\"]*)\" and store into variable \"([^\"]*)\"$")
 	public void enter_into_the_field_with_and_store_into_variable(String target, String value,String var) throws Throwable {
-    	mainActionFormSteps.enter_into_the_field_with_value_and_store_variable(target,value,var);
+		mainActionFormSteps.enter_into_the_field_with_value_and_store_variable(target,value,var);
 	}
 
 	@When("^enter into \"([^\"]*)\" field with random value that its length is (\\d+)$")
@@ -52,7 +52,7 @@ public class MainActionFormSteps {
 	public void enter_into_the_editor_field_with_variable(String target, String var) throws Throwable {
 		mainActionFormSteps.enter_into_the_editor(target,var);
 	}
-	
+
 	@When("^enter into the editor \"([^\"]*)\" field with value \"([^\"]*)\" and store into variable \"([^\"]*)\"$")
 	public void enter_into_the_editor_field_with_variable_and_store_into_variable(String target, String value,String var) throws Throwable {
 		mainActionFormSteps.enter_into_the_editor_and_store_into_variable(target,value,var);
@@ -63,11 +63,16 @@ public class MainActionFormSteps {
 		mainActionFormSteps.press_enter_key();
 	}
 
+	@When("^click on the element \"([^\"]*)\" has text is variable \"([^\"]*)\"$")
+	public void click_on_the_element_has_text_is_variable(String target, String var) throws Throwable {
+		mainActionFormSteps.click_on_the_element_with_variable(target,var);
+	}
+
 	@When("^click on the element \"([^\"]*)\"$")
 	public void click_on_the_element(String target) throws Throwable {
 		mainActionFormSteps.click_on_the_element(target);
 	}
-	
+
 	@When("^click on the \"([^\"]*)\"$")
 	public void click_on_the(String target) throws Throwable {
 		mainActionFormSteps.click_on_the_element(target);
@@ -82,17 +87,17 @@ public class MainActionFormSteps {
 	public void double_click_on_the(String element) throws Throwable {
 		mainActionFormSteps.double_click_on_the(element);
 	}
-	
+
 	@When("^right click on the \"([^\"]*)\"$")
 	public void right_click_on_the(String element) throws Throwable {
 		mainActionFormSteps.right_click_on_the(element);
 	}
-	
+
 	@When("^right click on the \"([^\"]*)\" and click on item has index is (\\d+)$")
 	public void right_click_on_the_and_click_on_item_has_index_is(String element, int indexItem) throws Throwable {
 		mainActionFormSteps.right_click_on_the_and_click_on_item_has_index(element,indexItem);
 	}
-	
+
 	@When("^click on the \"([^\"]*)\" at coordinates (\\d+) and (\\d+)$")
 	public void click_on_the_at_coordinates(String element, int xOffset, int yOffset) throws Throwable {
 		mainActionFormSteps.click_on_the_at_coordinates(element,xOffset,yOffset);
@@ -117,12 +122,12 @@ public class MainActionFormSteps {
 	public void check_checkbox(String element){
 		mainActionFormSteps.check_checkbox(element);
 	}
-	
+
 	@When("^uncheck on the \"([^\"]*)\"$")
 	public void uncheck_checkbox(String element){
 		mainActionFormSteps.uncheck_checkbox(element);
 	}
-	
+
 	@When("^select the label \"([^\"]*)\" from  the drop down \"([^\"]*)\"$")
 	public void select_label_from_drop_down_list(String visibleLabel, String element) throws Throwable {
 		mainActionFormSteps.select_label_from_drop_down_list(visibleLabel,element);

@@ -121,8 +121,16 @@ public class EndUserBaseSteps extends ScenarioSteps {
 	}
 	
 	@Step
-	public void store_number_in_value_of_element_in_variable(String element, String var){
+	public void store_number_in_text_of_element_in_variable(String element, String var){
 		String value = pageCore.getWebElement(element).getText();
+		String number = pageCore.getNumberInString(value);
+		listVar.put(var, String.valueOf(number));
+		TestLogger.info(listVar.get(var));
+	}
+	
+	@Step
+	public void store_number_in_value_of_element_in_variable(String element, String var){
+		String value = pageCore.getWebElement(element).getAttribute("value");
 		String number = pageCore.getNumberInString(value);
 		listVar.put(var, String.valueOf(number));
 		TestLogger.info(listVar.get(var));
