@@ -38,6 +38,16 @@ public class OtherBaseSteps {
 	   Thread.sleep(time*1000);
 	}
 	
+	@When("^store the sub text of variable \"(.*?)\" from index (\\d+) to index (\\d+) in \"(.*?)\" variable$")
+	public void store_the_sub_text_of_variable_by_index_in_variable(String srcvar, Integer beginStr, Integer endStr, String desvar) {
+		endUser.store_the_sub_text_of_variable_by_index_in_variable(srcvar, beginStr,  endStr, desvar);
+	}	
+	
+	@When("^store the text \"(.*?)\" in \"(.*?)\" variable$")
+	public void store_text_value_in_variable(String text, String var){
+		endUser.store_text_value_in_variable(text, var);
+	}
+	
 	@When("^store the number in text of element \"(.*?)\" in \"(.*?)\" variable$")
 	public void store_the_number_in_text_of_element_in_variable(String element, String var) {
 		endUser.store_number_in_text_of_element_in_variable(element,var);
@@ -46,6 +56,11 @@ public class OtherBaseSteps {
 	@When("^store the number in value of element \"(.*?)\" in \"(.*?)\" variable$")
 	public void store_the_number_in_value_of_element_in_variable(String element, String var) {
 		endUser.store_number_in_value_of_element_in_variable(element,var);
+	}
+	
+	@When("^store the number in value of variable \"(.*?)\" in \"(.*?)\" variable$")
+	public void store_the_number_in_value_of_variable_in_variable(String srcvar, String desvar) {
+		endUser.store_number_in_value_of_variable_in_variable(srcvar,desvar);
 	}
 	
 	@When("^store the number in string \"(.*?)\" in \"(.*?)\" variable$")

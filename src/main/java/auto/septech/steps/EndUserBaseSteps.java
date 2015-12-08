@@ -14,6 +14,7 @@ import auto.septech.coreactions.CoreActionForm;
 import auto.septech.coreactions.ManageFileAction;
 import auto.septech.coreactions.PageCore;
 import auto.septech.coreactions.WindowsAndFrames;
+import auto.septech.utilities.RandomData;
 import auto.septech.utilities.TestLogger;
 
 public class EndUserBaseSteps extends ScenarioSteps {
@@ -27,6 +28,7 @@ public class EndUserBaseSteps extends ScenarioSteps {
 	CoreActionForm mainActionForm;
 	ManageFileAction manageFileAction;
 	WindowsAndFrames windowsAndFrames;
+	RandomData randomData;
     public static HashMap<String, String> listVar = new HashMap<String, String>();
     @Step
     public void open_the_home_page(){
@@ -87,11 +89,24 @@ public class EndUserBaseSteps extends ScenarioSteps {
       	pageCore.waitForTextToAppear(textValue);
     }
     
+    @Step
+	public String get_substring_in_string_by_index(String value, Integer begin, Integer end){
+		String subString = value.substring(begin, end).trim();
+		return subString;
+	}
+    
 	@Step
-	public String get_substring_in_string(String value, Integer beginStr, Integer endStr){
+	public String get_substring_in_string(String value, String beginStr, String endStr){
 		String subString = value.substring(value.indexOf(beginStr), value.indexOf(endStr)-1).trim();
 		return subString;
-
+	}
+	
+	@Step
+	public void store_the_sub_text_of_variable_by_index_in_variable(String srcvar, Integer beginStr, Integer endStr, String desvar) {
+		String text=listVar.get(srcvar);
+		String subString = get_substring_in_string_by_index(text,beginStr, endStr);
+		listVar.put(desvar, subString);
+		TestLogger.info(listVar.get(desvar));
 	}
 
 	@Step
@@ -111,6 +126,8 @@ public class EndUserBaseSteps extends ScenarioSteps {
 
 	@Step
 	public void store_text_value_in_variable(String text, String var){
+		randomData = new RandomData();
+		text=randomData.processRandomCucumber(text);
 		listVar.put(var, text);
 		TestLogger.info(listVar.get(var));
 	}
@@ -129,6 +146,12 @@ public class EndUserBaseSteps extends ScenarioSteps {
 	}
 	
 	@Step
+	public void store_number_in_value_of_variable_in_variable(String srcvar,String desvar){
+		String temp=pageCore.getNumberInString(listVar.get(srcvar));
+		store_text_value_in_variable(temp,desvar);
+	}
+	
+	@Step
 	public void store_number_in_value_of_element_in_variable(String element, String var){
 		String value = pageCore.getWebElement(element).getAttribute("value");
 		String number = pageCore.getNumberInString(value);
@@ -138,6 +161,8 @@ public class EndUserBaseSteps extends ScenarioSteps {
 	
 	@Step
 	public void store_number_in_string_in_variable(String value, String var){
+		randomData = new RandomData();
+		value=randomData.processRandomCucumber(value);
 		String number = pageCore.getNumberInString(value);
 		listVar.put(var, String.valueOf(number));
 		TestLogger.info(listVar.get(var));
