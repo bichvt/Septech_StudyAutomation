@@ -114,12 +114,25 @@ public class CoreActionForm extends PageCore {
 	 */
 	public void clickOnElement(String element){
 		WebElement onElement = element(getWebElement(element));
-		if(!onElement.isEnabled()){
-			TestLogger.info("click by javascript");
-			clickByJavascript(element);
+		if(element.contains("publishbutton")){
+			if(onElement.isDisplayed()){
+				onElement.click();
+				if(onElement.isDisplayed()){
+					onElement.click();
+				}
+			}
+		}else if(element.contains("menu.listarticle")){
+			if(onElement.isDisplayed())
+				onElement.click();
 		}
-		else
-			onElement.click();
+		else{
+			if(!onElement.isEnabled()){
+				TestLogger.info("click by javascript");
+				clickByJavascript(element);
+			}
+			else
+				onElement.click();
+		}
 	}
 	/**
 	 * double click on element

@@ -1,6 +1,7 @@
 package auto.septech.coreactions;
 
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -70,5 +71,17 @@ public class DialogAndAlert extends PageCore{
 		new WebDriverWait(getDriver(), 60)
         .ignoring(NoAlertPresentException.class)
         .until(ExpectedConditions.alertIsPresent());
+	}
+	
+	public boolean isAlertPresent(){
+	    boolean foundAlert = false;
+	    WebDriverWait wait = new WebDriverWait(getDriver(), 5 /*timeout in seconds*/);
+	    try {
+	        wait.until(ExpectedConditions.alertIsPresent());
+	        foundAlert = true;
+	    } catch (TimeoutException eTO) {
+	        foundAlert = false;
+	    }
+	    return foundAlert;
 	}
 }

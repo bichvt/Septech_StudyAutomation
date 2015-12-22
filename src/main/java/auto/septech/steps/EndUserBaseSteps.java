@@ -8,7 +8,6 @@ import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
 
 import org.apache.commons.io.FileUtils;
-
 import auto.septech.coreactions.DialogAndAlert;
 import auto.septech.coreactions.CoreActionForm;
 import auto.septech.coreactions.ManageFileAction;
