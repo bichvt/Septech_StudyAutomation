@@ -8,15 +8,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.MoveTargetOutOfBoundsException;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import auto.septech.utilities.TestLogger;
 import org.openqa.selenium.JavascriptExecutor;
 public class CoreActionForm extends PageCore {
-
 	/*********checkbox/radio button********************/
 	/**
 	 * check checkbox
@@ -108,6 +110,18 @@ public class CoreActionForm extends PageCore {
 		action.release();
 	}
 
+	public boolean isAlertPresent(){
+	    boolean foundAlert = false;
+	    WebDriverWait wait = new WebDriverWait(getDriver(), 5 /*timeout in seconds*/);
+	    try {
+	        wait.until(ExpectedConditions.alertIsPresent());
+	        foundAlert = true;
+	    } catch (TimeoutException eTO) {
+	        foundAlert = false;
+	    }
+	    return foundAlert;
+	}
+	
 	/**
 	 * click on Element
 	 * @param element
@@ -132,6 +146,9 @@ public class CoreActionForm extends PageCore {
 			}
 			else
 				onElement.click();
+		}
+		if(isAlertPresent()==true){
+			getAlert().accept();
 		}
 	}
 	/**
