@@ -115,7 +115,7 @@ public class CoreActionForm extends PageCore {
 	public void clickOnElement(String element){
 		WebElement onElement = element(getWebElement(element));
 		if(element.contains("publishbutton")){
-			if(onElement!=null){
+			if(onElement!=null&&onElement.isEnabled()){
 				onElement.click();
 				if(onElement!=null){
 					onElement.click();
