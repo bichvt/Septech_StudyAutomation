@@ -131,12 +131,13 @@ public class CoreActionForm extends PageCore {
 		if(element.contains("publishbutton")){
 			if(onElement!=null&&onElement.isEnabled()){
 				onElement.click();
-				if(onElement!=null){
-					onElement.click();
+				WebElement onElement1 = element(getWebElement(element));
+				if(onElement1!=null&&onElement1.isEnabled()){
+					onElement1.click();
 				}
 			}
 		}else if(element.contains("menu.listarticle")){
-			if(onElement!=null)
+			if(onElement!=null&&onElement.isEnabled())
 				onElement.click();
 		}
 		else{
