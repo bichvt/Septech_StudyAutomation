@@ -102,7 +102,7 @@ public class WindowsAndFrames extends PageCore{
 	public void openLinkInANewWindowAndSwitchToIt(String linkText) {
 		try {
 			Actions act = new Actions(getDriver());
-			WebElement onElement = getDriver().findElement(By.linkText(linkText));
+			WebElement onElement = getDriver().findElement(org.openqa.selenium.By.linkText(linkText));
 			act.contextClick(onElement).perform();
 			act.sendKeys("w").perform(); 
 			Thread.sleep(1000);
