@@ -20,6 +20,6 @@ public class AllFeatureGenerationTest {
 		File sourceFile = new File(TestLinkBase.pathFeature+"features/");
 		CucumberUtil.copyDirectoryToDirectory(sourceFile,backUpFile);
 		CucumberUtil.deleteDirectory(sourceFile);
-		genFile.generateAllFeatureFile(TestLinkBase.pathFeature,testLinkApi,TestLinkBase.project,TestLinkBase.planName);
+		genFile.generateAllFeatureFile(TestLinkBase.pathFeature,testLinkApi,TestLinkBase.project,TestLinkBase.planName, TestLinkBase.buildName);
 	}
 }

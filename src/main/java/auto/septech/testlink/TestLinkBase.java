@@ -299,6 +299,25 @@ public class TestLinkBase {
 	}
 
 	/**
+	 * Get Test case by build
+	 * @author phuong_dt
+	 * @param api
+	 * @param testSuiteId
+	 */
+	ArrayList<TestCase> getTestCaseByBuild(TestLinkAPI api, Integer testPlanId, Integer buildId){
+		ArrayList<TestCase> list = new ArrayList<TestCase>();
+		TestCase[]arrTestCases;
+		try {
+			arrTestCases = api.getTestCasesForTestPlan(testPlanId, null, buildId, null, null, null, null, null, null, null, TestCaseDetails.FULL);
+			for(int i = 0; i<arrTestCases.length; i++){
+				list.add(i,arrTestCases[i]);
+			}
+		} catch(TestLinkAPIException te) {
+		}
+		return list;
+	}
+
+	/**
 	 * get sub test suite from test suites
 	 * @param api
 	 * @param testSuiteId
@@ -318,6 +337,24 @@ public class TestLinkBase {
 	}
 
 	/**
+	 * verify if testcase exist in list or not
+	 * @param source
+	 * @param dest
+	 * @return
+	 */
+	public Boolean isExistTestcaseInTestBuild(TestCase source, ArrayList<TestCase> dest){
+		Boolean ret = false;
+		for(int i = 0; i<dest.size(); i++){
+			if(source.getId().equals(dest.get(i).getId())){
+				ret = true;
+				break;
+			}
+		}
+		return ret;
+
+	}
+
+	/**
 	 * Write feature file by suiteid
 	 * @author phuong_dt
 	 * @param pathFile
@@ -325,7 +362,7 @@ public class TestLinkBase {
 	 * @param suiteId
 	 * @throws InterruptedException 
 	 */
-	public void generateFeatureFileBySuiteId(String pathFile,TestLinkAPI api, Integer suiteId) throws InterruptedException{
+	public void generateFeatureFileBySuiteId(String pathFile,TestLinkAPI api, Integer suiteId, Integer buildId, Integer planId) throws InterruptedException{
 		String suiteName=getTestSuiteById(api,suiteId).getName();
 		String backGround=getTestSuiteById(api,suiteId).getDetails();
 		String fs = File.separator;
@@ -351,27 +388,33 @@ public class TestLinkBase {
 								+"/"
 								+fileName+".feature")
 								.replace("/", fs).replace("\\", fs));
-						if(backGround.toLowerCase().contains("background:"))
-							stringBuilder.append("\n"+CucumberUtil.processSpecialString(CucumberUtil.addCucumberString(CucumberUtil.processSpecialString(backGround))));
-						else
-							stringBuilder.append("\n"+"Background:"+"\n"+CucumberUtil.processSpecialString(CucumberUtil.addCucumberString(CucumberUtil.processSpecialString(backGround))));
+						if(backGround!=null && backGround!="" &&!backGround.isEmpty()){
+							if(backGround.toLowerCase().contains("background:"))
+								stringBuilder.append("\n"+CucumberUtil.processSpecialString(CucumberUtil.addCucumberString(CucumberUtil.processSpecialString(backGround))));
+							else
+								stringBuilder.append("\n"+"Background:"+"\n"+CucumberUtil.processSpecialString(CucumberUtil.addCucumberString(CucumberUtil.processSpecialString(backGround))));
+						}
 						ArrayList<TestCase> testCase = getTestCase(api,suiteId); 
+						ArrayList<TestCase> testCase1 = getTestCaseByBuild(api, planId, buildId);
 						for(int k = 0; k<testCase.size(); k++){
 							if(testCase.get(k).getExecutionType().getValue()==2){
-								Integer caseId = testCase.get(k).getId();
-								String caseName = testCase.get(k).getName().trim();
-								String caseSummary = CucumberUtil.processSpecialString(CucumberUtil.addCucumberString(CucumberUtil.processSpecialString(testCase.get(k).getSummary()).trim()));
-								//String caseSummary = testCase.get(k).getSummary();
-								TestLogger.info("caseName "+caseName);
-								stringBuilder.append("\n#Case ID:"+ caseId);
-								stringBuilder.append("\n#Case Name:"+ caseName);
-								if(!caseName.contains("Scenario")){
-									if(caseSummary.toLowerCase().contains("examples"))
-										stringBuilder.append("\nScenario Outline: "+caseName);
-									else
-										stringBuilder.append("\nScenario: "+caseName);
+								if(isExistTestcaseInTestBuild(testCase.get(k),testCase1)==true){
+									TestLogger.info("generate test case for build");
+									Integer caseId = testCase.get(k).getId();
+									String caseName = testCase.get(k).getName().trim();
+									String caseSummary = CucumberUtil.processSpecialString(CucumberUtil.addCucumberString(CucumberUtil.processSpecialString(testCase.get(k).getSummary()).trim()));
+									//String caseSummary = testCase.get(k).getSummary();
+									TestLogger.info("caseName "+caseName);
+									stringBuilder.append("\n#Case ID:"+ caseId);
+									stringBuilder.append("\n#Case Name:"+ caseName);
+									if(!caseName.contains("Scenario")){
+										if(caseSummary.toLowerCase().contains("examples"))
+											stringBuilder.append("\nScenario Outline: "+caseName);
+										else
+											stringBuilder.append("\nScenario: "+caseName);
+									}
+									stringBuilder .append("\n\t"+caseSummary);
 								}
-								stringBuilder .append("\n\t"+caseSummary);
 							}
 						}
 						/*if(f.exists()){
@@ -409,7 +452,7 @@ public class TestLinkBase {
 	 * @param api
 	 * @param projectName
 	 */
-	public void generateAllFeatureFile(String pathFile,TestLinkAPI api, String projectName, String planName){
+	public void generateAllFeatureFile(String pathFile,TestLinkAPI api, String projectName, String planName, String buildName){
 		ArrayList<TestSuite> testSuite;
 		if(planName!="" || planName!=null)
 			testSuite = getTestSuiteForTestPlan(api, planName, projectName);
@@ -419,7 +462,9 @@ public class TestLinkBase {
 			Integer suiteId=testSuite.get(j).getId();
 			try {
 				TestLogger.info("Suite name is "+testSuite.get(j).getName()+" and id = "+suiteId);
-				generateFeatureFileBySuiteId(pathFile,api,suiteId);
+				Integer buildId=getBuildIdByName(api, projectName, planName, buildName);
+				Integer planId= getTestPlanId(api, planName, projectName);
+				generateFeatureFileBySuiteId(pathFile,api,suiteId,buildId,planId);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -461,16 +506,16 @@ public class TestLinkBase {
 	 * @param projectName
 	 * @return
 	 */
-	public Integer getBuildIdByName(TestLinkAPI api, String buildName, String planName, String projectName){
+	public Integer getBuildIdByName(TestLinkAPI api, String projectName, String planName, String buildName){
 		Build[] arrayBuild=api.getBuildsForTestPlan(getTestPlanId(api, planName, projectName));
 		Integer id = null;
 		for(int i=0; i<arrayBuild.length; i++){
-			if(arrayBuild[i].getName().equals(buildName)){
+			if(arrayBuild[i].getName().trim().equals(buildName.trim())){
 				id=arrayBuild[i].getId();
 				break;
 			}
 		}
-		TestLogger.info(String.valueOf(id));
+		TestLogger.info(buildName+" has id: "+String.valueOf(id));
 		return id;
 	}
 
