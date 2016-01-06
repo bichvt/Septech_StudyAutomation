@@ -16,6 +16,7 @@ public class FeatureUtil {
 	public static ArrayList<HashMap<String,String>> caseList=null;
 	private static BufferedReader br;
 	private static BufferedReader tempbr;
+	private BufferedReader br1;
 
 	/**
 	 * Get file list in folder
@@ -47,6 +48,48 @@ public class FeatureUtil {
 						if (fileEntry1.isFile()) {
 							temp = fileEntry1.getName();
 							if ((temp.substring(temp.lastIndexOf('.') + 1, temp.length()).toLowerCase()).equals("feature")){
+								tempFile = fileEntry.getAbsolutePath()+ "/" + fileEntry1.getName();
+								fileName.add(tempFile.replace("/", fs).replace("\\", fs));
+							}
+							tempFile="";
+						}
+					}
+				}
+
+			}
+		}
+		return fileName;
+	}
+	/**
+	 * Get file list in folder
+	 * @param folder
+	 * @return
+	 */
+	public static ArrayList<String> listObjectFiles(String path) {
+		String fs = File.separator;
+		String tempFile="";
+		String temp="";
+		File folder = new File(path);
+		ArrayList<String> fileName=new ArrayList<String>();
+		if(folder.isFile()){
+			TestLogger.info("root folder is file");
+			fileName.add(path.replace("/", fs).replace("\\", fs));
+		}
+		else{
+			for (File fileEntry : folder.listFiles()) {
+				if (fileEntry.isFile()) {
+					temp = fileEntry.getName();
+					if ((temp.substring(temp.lastIndexOf('.') + 1, temp.length()).toLowerCase()).equals("properties")){
+						tempFile = folder.getAbsolutePath()+ "/" + fileEntry.getName();
+						fileName.add(tempFile.replace("/", fs).replace("\\", fs));
+					}
+					tempFile="";
+				}
+				else{
+					for (File fileEntry1 : fileEntry.listFiles()) {
+						if (fileEntry1.isFile()) {
+							temp = fileEntry1.getName();
+							if ((temp.substring(temp.lastIndexOf('.') + 1, temp.length()).toLowerCase()).equals("properties")){
 								tempFile = fileEntry.getAbsolutePath()+ "/" + fileEntry1.getName();
 								fileName.add(tempFile.replace("/", fs).replace("\\", fs));
 							}
@@ -145,5 +188,27 @@ public class FeatureUtil {
 		background=bground.toString();
 		feature=fture.toString().substring(fture.toString().indexOf(":")+1).trim();
 		TestLogger.info("finish read file");
+	}
+
+	/**
+	 * Read object file
+	 * @param filename
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	public String readObjectFile(String filename) throws FileNotFoundException, IOException{
+		TestLogger.info("read file "+filename);
+		String fs = File.separator;
+		br1 = new BufferedReader(new FileReader(filename.replace("/", fs).replace("\\", fs)));
+		StringBuilder bground= new StringBuilder();
+		String line = br1.readLine();
+		while (line!=null) {
+			//Get content
+			bground.append(line);
+			bground.append("\n");
+			line=br1.readLine();
+		}
+		return bground.toString();
 	}
 }

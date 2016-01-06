@@ -199,7 +199,7 @@ public class PageCore extends PageObject {
 	 * @return
 	 */
 	public String getCurrentValueOfElement(String element) {
-		return  element(getWebElement(element)).getValue();
+		return  element(getWebElement(element)).getValue().trim();
 	}	
 
 	/**
@@ -208,7 +208,7 @@ public class PageCore extends PageObject {
 	 * @return
 	 */
 	public String getCurrentTextOfElement(String element) {
-		return  element(getWebElement(element)).getText();
+		return  element(getWebElement(element)).getText().trim();
 	}
 
 	/**

@@ -33,6 +33,7 @@ import br.eti.kinoshita.testlinkjavaapi.util.TestLinkAPIException;
 public class TestLinkBase {
 	public static String pathFeature="";
 	public static String pathFileToWriteTestLink="";
+	public static String pathFileOfObject="";
 	public static String devKey="";
 	public static String url="";
 	public static String project="";
@@ -51,6 +52,7 @@ public class TestLinkBase {
 	public void getSystemProperty() throws IOException{
 		pathFeature = System.getProperty("pathFeature");
 		pathFileToWriteTestLink = System.getProperty("pathFileToWriteTestLink");
+		pathFileOfObject = System.getProperty("pathFileOfObject");
 		devKey = System.getProperty("devKey");
 		url = System.getProperty("url");
 		project = System.getProperty("project");
@@ -64,6 +66,8 @@ public class TestLinkBase {
 			pathFeature = PropertiesUtil.load_config_sys().getProperty("testlink.pathFeature");
 		if (pathFileToWriteTestLink==null || pathFileToWriteTestLink=="") 
 			pathFileToWriteTestLink = PropertiesUtil.load_config_sys().getProperty("testlink.pathFileToWriteTestLink");
+		if (pathFileOfObject==null || pathFileOfObject=="") 
+			pathFileOfObject = PropertiesUtil.load_config_sys().getProperty("testlink.pathFileOfObject");
 		if (devKey==null || devKey=="") 
 			devKey = PropertiesUtil.load_config_sys().getProperty("testlink.devKey");
 		if (url==null || url=="") 
@@ -83,7 +87,8 @@ public class TestLinkBase {
 
 		String fs = File.separator;
 		pathFeature=System.getProperty("user.dir")+"/"+pathFeature.replace("/", fs).replace("\\", fs);
-		//pathFileToWriteTestLink=System.getProperty("user.dir")+"/"+pathFileToWriteTestLink.replace("/", fs).replace("\\", fs);
+		pathFileToWriteTestLink=System.getProperty("user.dir")+"/"+pathFileToWriteTestLink.replace("/", fs).replace("\\", fs);
+		pathFileOfObject=System.getProperty("user.dir")+"/"+pathFileOfObject.replace("/", fs).replace("\\", fs);
 		reportPath=System.getProperty("user.dir")+"/"+reportPath.replace("/", fs).replace("\\", fs);
 	}
 
@@ -469,6 +474,30 @@ public class TestLinkBase {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	/**
+	 * get suiteid by name
+	 * @param api
+	 * @param projectName
+	 * @param planName
+	 * @param suiteName
+	 * @return
+	 */
+	public Integer getSuiteId(TestLinkAPI api, String projectName, String planName, String suiteName){
+		Integer suiteId = null;
+		ArrayList<TestSuite> testSuite;
+		if(planName!="" || planName!=null)
+			testSuite = getTestSuiteForTestPlan(api, planName, projectName);
+		else
+			testSuite = getFirstLevelTestSuite(api,projectName); 
+		for(int j = 0; j<testSuite.size(); j++){
+			if(testSuite.get(j).getName().trim().equals(suiteName.trim())){
+				suiteId =  testSuite.get(j).getId();
+				break;
+			}
+		}
+		return suiteId;
 	}
 
 	/**
