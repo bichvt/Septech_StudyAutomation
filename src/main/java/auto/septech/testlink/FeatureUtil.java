@@ -204,9 +204,11 @@ public class FeatureUtil {
 		StringBuilder bground= new StringBuilder();
 		String line = br1.readLine();
 		while (line!=null) {
-			//Get content
-			bground.append(line);
-			bground.append("\n");
+			if(line.trim().length()!=0){
+				//Get content
+				bground.append(line);
+				bground.append("\n");
+			}
 			line=br1.readLine();
 		}
 		return bground.toString();
