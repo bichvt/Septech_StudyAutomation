@@ -43,6 +43,11 @@ public class OtherBaseSteps {
 		endUser.store_the_sub_text_of_variable_by_index_in_variable(srcvar, beginStr,  endStr, desvar);
 	}	
 	
+	@When("^store the result of minus between variable \"(.*?)\" and variable \"(.*?)\" in variable \"(.*?)\"$")
+	public void store_the_result_of_minus_between_variable(String var1, String var2, String varResult){
+		endUser.store_the_result_of_minus_between_variable(var1, var1,varResult);
+	}
+	
 	@When("^store the text \"(.*?)\" in \"(.*?)\" variable$")
 	public void store_text_value_in_variable(String text, String var){
 		endUser.store_text_value_in_variable(text, var);
