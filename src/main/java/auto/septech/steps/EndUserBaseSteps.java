@@ -182,4 +182,10 @@ public class EndUserBaseSteps extends ScenarioSteps {
 	public String get_number_in_string(String value){
 		return pageCore.getNumberInString(value);
 	}
+	
+	@Step
+	public void store_result_of_jquery(String jquery, String var){
+		listVar.put(var, pageCore.runJquery(jquery));
+		TestLogger.info(listVar.get(var));
+	}
 }

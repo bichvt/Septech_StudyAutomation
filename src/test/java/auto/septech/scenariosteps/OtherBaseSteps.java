@@ -38,6 +38,11 @@ public class OtherBaseSteps {
 	   Thread.sleep(time*1000);
 	}
 	
+	@When("^store the result of jquery \"([^\"]*)\" in variable \"([^\"]*)\"$")
+	public void store_the_result_of_jquery(String jquery, String var){
+		endUser.store_result_of_jquery(jquery, var);
+	}
+	
 	@When("^store the sub text of variable \"(.*?)\" from index (\\d+) to index (\\d+) in \"(.*?)\" variable$")
 	public void store_the_sub_text_of_variable_by_index_in_variable(String srcvar, Integer beginStr, Integer endStr, String desvar) {
 		endUser.store_the_sub_text_of_variable_by_index_in_variable(srcvar, beginStr,  endStr, desvar);

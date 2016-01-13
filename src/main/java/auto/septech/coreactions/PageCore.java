@@ -69,6 +69,17 @@ public class PageCore extends PageObject {
 	}
 	
 	/**
+	 * runJquery
+	 * @param jquery
+	 * @return
+	 */
+	public String runJquery(String jquery) {
+		JavascriptExecutor jse = (JavascriptExecutor)getDriver();
+		String response = jse.executeScript(jquery).toString();
+		return response;
+	}
+	
+	/**
 	 * get element
 	 * @param target
 	 * @return
