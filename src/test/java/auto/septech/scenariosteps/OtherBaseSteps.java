@@ -40,7 +40,7 @@ public class OtherBaseSteps {
 	
 	@When("^store the result of jquery \"([^\"]*)\" in variable \"([^\"]*)\"$")
 	public void store_the_result_of_jquery(String jquery, String var){
-		endUser.store_result_of_jquery(jquery, var);
+		endUser.store_result_of_jquery(jquery.replace("@", "\""), var);
 	}
 	
 	@When("^store the sub text of variable \"(.*?)\" from index (\\d+) to index (\\d+) in \"(.*?)\" variable$")

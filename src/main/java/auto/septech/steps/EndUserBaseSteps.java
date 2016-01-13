@@ -185,6 +185,7 @@ public class EndUserBaseSteps extends ScenarioSteps {
 	
 	@Step
 	public void store_result_of_jquery(String jquery, String var){
+		TestLogger.info(jquery);
 		listVar.put(var, pageCore.runJquery(jquery));
 		TestLogger.info(listVar.get(var));
 	}
