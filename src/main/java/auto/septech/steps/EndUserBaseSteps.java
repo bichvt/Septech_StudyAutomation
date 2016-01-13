@@ -146,6 +146,8 @@ public class EndUserBaseSteps extends ScenarioSteps {
 	
 	@Step
 	public void store_the_result_of_minus_between_variable(String var1, String var2, String var3){
+		TestLogger.info(listVar.get(var1));
+		TestLogger.info(listVar.get(var2));
 		Integer number1 = Integer.valueOf(listVar.get(var1));
 		Integer number2 = Integer.valueOf(listVar.get(var2));
 		listVar.put(var3, String.valueOf(number1-number2));
