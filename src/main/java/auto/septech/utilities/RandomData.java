@@ -132,6 +132,22 @@ public class RandomData {
 	}
 
 	/**
+	 * get random special string
+	 * @return random string
+	 */
+	public String getRandomSpecialString(Integer number){
+		String temp="~!@#$%^&*()_+{}:\"<>?`-=[]\\;'./,";
+		char[] chars = temp.toCharArray();
+		StringBuilder sb = new StringBuilder();
+		Random random = new Random();
+		for (int i = 0; i < number; i++) {
+			char c = chars[random.nextInt(chars.length)];
+			sb.append(c);
+		}
+		return sb.toString();
+	}
+	
+	/**
 	 * Process Random cucumber input
 	 * ${} – everything inside will be parsed, strings are comma separated
              numerical value – create random alphanumeric string
@@ -140,6 +156,7 @@ public class RandomData {
        S – random alphanumeric uppercase latin string
        s – random alphanumeric lowercase latin string
        J – random alphanumeric lowercase japan string
+       C – random special string
 	 * @param value
 	 * @return
 	 */
@@ -162,6 +179,8 @@ public class RandomData {
 						retValue=retValue+getRandomLatinString(Integer.valueOf(parts.substring(1))).toLowerCase();
 					if(parts.toUpperCase().startsWith("J"))
 						retValue=retValue+getRandomJapanString(Integer.valueOf(parts.substring(1)));
+					if(parts.toUpperCase().startsWith("C"))
+						retValue=retValue+getRandomSpecialString(Integer.valueOf(parts.substring(1)));
 					if(parts.startsWith("!"))
 						retValue=retValue+parts.substring(1);
 				}

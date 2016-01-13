@@ -107,8 +107,8 @@ public class CoreActionFormBaseSteps extends EndUserBaseSteps {
 	
 	@Step
 	public void click_on_the_element_with_variable(String element, String var) throws Exception {
-		System.out.println(ObjectMap.getLocatorString(element)+"[text()='"+listVar.get(var)+"']");
-		WebElement webElement = getDriver().findElement(pageCore.getObject(ObjectMap.getLocatorString(element)+"[text()='"+listVar.get(var)+"']"));
+		System.out.println(ObjectMap.getLocatorString(element)+"[contains(text(),'"+listVar.get(var)+"')]");
+		WebElement webElement = getDriver().findElement(pageCore.getObject(ObjectMap.getLocatorString(element)+"[contains(text(),'"+listVar.get(var)+"')]"));
 		pageCore.clickOn(webElement);
 	}
     
