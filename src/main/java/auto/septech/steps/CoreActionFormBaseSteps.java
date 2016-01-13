@@ -101,6 +101,11 @@ public class CoreActionFormBaseSteps extends EndUserBaseSteps {
 	}
 	
 	@Step
+	public void press_tab_key(Integer number){
+		mainActionForm.pressTabKey(number);
+	}
+	
+	@Step
 	public void click_on_the_text(String text) {
 		pageCore.$("//*[text()="+text+"]").click();
 	}

@@ -110,18 +110,29 @@ public class CoreActionForm extends PageCore {
 		action.release();
 	}
 
-	public boolean isAlertPresent(){
-	    boolean foundAlert = false;
-	    WebDriverWait wait = new WebDriverWait(getDriver(), 5 /*timeout in seconds*/);
-	    try {
-	        wait.until(ExpectedConditions.alertIsPresent());
-	        foundAlert = true;
-	    } catch (TimeoutException eTO) {
-	        foundAlert = false;
-	    }
-	    return foundAlert;
+	/**
+	 * press tab key
+	 */
+	public void pressTabKey(Integer number){
+		for(int i = 0; i<number; i++){
+			Actions action=new Actions(getDriver());
+			action.sendKeys(Keys.TAB).perform();
+			action.release();
+		}
 	}
-	
+
+	public boolean isAlertPresent(){
+		boolean foundAlert = false;
+		WebDriverWait wait = new WebDriverWait(getDriver(), 5 /*timeout in seconds*/);
+		try {
+			wait.until(ExpectedConditions.alertIsPresent());
+			foundAlert = true;
+		} catch (TimeoutException eTO) {
+			foundAlert = false;
+		}
+		return foundAlert;
+	}
+
 	/**
 	 * click on Element
 	 * @param element

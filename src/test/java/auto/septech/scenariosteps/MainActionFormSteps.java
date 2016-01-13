@@ -62,6 +62,11 @@ public class MainActionFormSteps {
 	public void press_enter_key() throws Throwable {
 		mainActionFormSteps.press_enter_key();
 	}
+	
+	@When("^press tab key (\\d+) times$")
+	public void press_tab_key(int number) throws Throwable {
+		mainActionFormSteps.press_tab_key(number);
+	}
 
 	@When("^click on the element \"([^\"]*)\" has text is variable \"([^\"]*)\"$")
 	public void click_on_the_element_has_text_is_variable(String target, String var) throws Throwable {
