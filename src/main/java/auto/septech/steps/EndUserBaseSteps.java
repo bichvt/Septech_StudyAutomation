@@ -2,6 +2,8 @@ package auto.septech.steps;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 import net.thucydides.core.annotations.Step;
@@ -13,6 +15,7 @@ import auto.septech.coreactions.CoreActionForm;
 import auto.septech.coreactions.ManageFileAction;
 import auto.septech.coreactions.PageCore;
 import auto.septech.coreactions.WindowsAndFrames;
+import auto.septech.databases.ConnectDatabase;
 import auto.septech.utilities.RandomData;
 import auto.septech.utilities.TestLogger;
 
@@ -28,6 +31,7 @@ public class EndUserBaseSteps extends ScenarioSteps {
 	ManageFileAction manageFileAction;
 	WindowsAndFrames windowsAndFrames;
 	RandomData randomData;
+	ConnectDatabase connectDatabase = new ConnectDatabase();
     public static HashMap<String, String> listVar = new HashMap<String, String>();
     @Step
     public void open_the_home_page(){
@@ -187,6 +191,21 @@ public class EndUserBaseSteps extends ScenarioSteps {
 	public void store_result_of_jquery(String jquery, String var){
 		TestLogger.info(jquery);
 		listVar.put(var, pageCore.runJquery(jquery));
+		TestLogger.info(listVar.get(var));
+	}
+	
+	@Step
+	public void store_number_of_result_of_query(String myQueries, String var) {
+		try {
+			ResultSet rs = connectDatabase.executeQuery(myQueries);
+			rs.last();
+			Integer size = rs.getRow();
+			rs.beforeFirst();
+			listVar.put(var, String.valueOf(size));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		TestLogger.info(listVar.get(var));
 	}
 }

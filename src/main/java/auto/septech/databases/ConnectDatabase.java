@@ -12,13 +12,15 @@ import auto.septech.utilities.TestLogger;
 
 public class ConnectDatabase {
 	// JDBC driver name and database URL
-	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	static String DB_URL = "jdbc:mysql://127.0.0.1:3306/smaport";
+	//static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+	//static String DB_URL = "jdbc:mysql://127.0.0.1:3306/smaport";
 
 	// Database credentials
 	public static String dbName="";
 	public static String dbUser="";
 	public static String dbPassword="";
+	public static String dbUrl="";
+	public static String jdbcDriver="";
 	static Connection conn = null;
 	static Statement stmt = null;
 	static ResultSet rs = null;
@@ -27,28 +29,35 @@ public class ConnectDatabase {
 		dbName = System.getProperty("dbName");
 		dbUser = System.getProperty("dbUser");
 		dbPassword = System.getProperty("dbPassword");
+		dbUrl = System.getProperty("dbUrl");
+		jdbcDriver = System.getProperty("jdbcDriver");
 		if (dbName==null || dbName=="") 
 			dbName = PropertiesUtil.load_config_sys().getProperty("db.dbName");
 		if (dbUser==null || dbUser=="") 
 			dbUser = PropertiesUtil.load_config_sys().getProperty("db.dbUser");
 		if (dbPassword==null || dbPassword=="") 
 			dbPassword = PropertiesUtil.load_config_sys().getProperty("db.dbPassword");
+		if (dbUrl==null || dbUrl=="") 
+			dbUrl = PropertiesUtil.load_config_sys().getProperty("db.dbUrl");
+		if (jdbcDriver==null || jdbcDriver=="") 
+			jdbcDriver = PropertiesUtil.load_config_sys().getProperty("db.jdbcDriver");
 	}
 	
-	public static ResultSet executeQuery(String myQueries){
+	public ResultSet executeQuery(String myQueries){
 		try {
 			TestLogger.info("connect database");
 			getConnectionInfo();
 			// STEP 2: Register JDBC driver
-			Class.forName(JDBC_DRIVER);
+			Class.forName(jdbcDriver);
 
 			// STEP 3: Open a connection
 			//DB_URL=DB_URL+dbName;
-			conn = DriverManager.getConnection(DB_URL, dbUser, dbPassword);
+			conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
 
 			// STEP 4: Execute a query
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(myQueries);
+			TestLogger.info(myQueries);
 			return rs;
 		} catch (SQLException se) {
 			// Handle errors for JDBC
@@ -78,16 +87,16 @@ public class ConnectDatabase {
 		}
 	}
 
-	public static void executeUpdate(String myQueries) {
+	public void executeUpdate(String myQueries) {
 		try {
 			TestLogger.info("connect database");
 			getConnectionInfo();
 			// STEP 2: Register JDBC driver
-			Class.forName(JDBC_DRIVER);
+			Class.forName(jdbcDriver);
 
 			// STEP 3: Open a connection
 			//DB_URL=DB_URL+dbName;
-			conn = DriverManager.getConnection(DB_URL, dbUser, dbPassword);
+			conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
 
 			// STEP 4: Execute a query
 			stmt = conn.createStatement();
