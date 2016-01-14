@@ -118,6 +118,11 @@ public class CoreActionFormBaseSteps extends EndUserBaseSteps {
 	}
     
 	@Step
+	public void click_on_the_element_by_javascript(String element) {
+		mainActionForm.clickByJavascript(element);
+	}
+	
+	@Step
 	public void click_on_the_element(String element) {
 		mainActionForm.clickOnElement(element);
 	}

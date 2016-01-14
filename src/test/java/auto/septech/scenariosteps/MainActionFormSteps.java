@@ -82,6 +82,11 @@ public class MainActionFormSteps {
 	public void click_on_the(String target) throws Throwable {
 		mainActionFormSteps.click_on_the_element(target);
 	}
+	
+	@When("^click by javascript on the \"([^\"]*)\"$")
+	public void click_on_the_using_javascript(String target) throws Throwable {
+		mainActionFormSteps.click_on_the_element_by_javascript(target);
+	}
 
 	@When("^click and hold the \"([^\"]*)\"$")
 	public void click_and_hold(String element) throws Throwable {
