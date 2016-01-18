@@ -100,6 +100,15 @@ public class CoreActionForm extends PageCore {
 		WebElement onElement = element(getWebElement(element));
 		((JavascriptExecutor)getDriver()).executeScript("arguments[0].click();", onElement);
 	}
+	
+	/**
+	 * press down arrow key
+	 */
+	public void pressDownArrowKey(){
+		Actions action=new Actions(getDriver());
+		action.sendKeys(Keys.ARROW_DOWN).perform();
+		action.release();
+	}
 
 	/**
 	 * press enter key

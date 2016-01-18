@@ -57,6 +57,11 @@ public class MainActionFormSteps {
 	public void enter_into_the_editor_field_with_variable_and_store_into_variable(String target, String value,String var) throws Throwable {
 		mainActionFormSteps.enter_into_the_editor_and_store_into_variable(target,value,var);
 	}
+	
+	@When("^press down arrow key$")
+	public void press_down_arrow_key() throws Throwable {
+		mainActionFormSteps.press_down_arrow_key();
+	}
 
 	@When("^press enter key$")
 	public void press_enter_key() throws Throwable {
