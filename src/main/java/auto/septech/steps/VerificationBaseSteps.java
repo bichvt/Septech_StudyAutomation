@@ -270,8 +270,26 @@ public class VerificationBaseSteps extends EndUserBaseSteps {
 	}
 	
 	@Step
-	public void the_variable_should_be_equal_variable_plus(String arg1, String arg2, int arg3){
+	public void the_variable_should_be_equal_variable_plus(String arg1, String arg2, double arg3){
 	    // Write code here that turns the phrase above into concrete actions
-		assertThat(Integer.valueOf(listVar.get(arg1)),equalTo(Integer.valueOf(listVar.get(arg2))+arg3));
+		assertThat(Double.valueOf(listVar.get(arg1)),equalTo(Double.valueOf(listVar.get(arg2))+arg3));
+	}
+	
+	@Step
+	public void the_variable_should_be_equal_variable_minus(String arg1, String arg2, double arg3){
+	    // Write code here that turns the phrase above into concrete actions
+		assertThat(Double.valueOf(listVar.get(arg1)),equalTo(Double.valueOf(listVar.get(arg2))-arg3));
+	}
+	
+	@Step
+	public void the_variable_should_be_equal_variable_div(String arg1, String arg2, double arg3){
+	    // Write code here that turns the phrase above into concrete actions
+		assertThat(Double.valueOf(listVar.get(arg1)),equalTo(Double.valueOf(listVar.get(arg2))/arg3));
+	}
+	
+	@Step
+	public void the_variable_should_be_equal_variable_multiply(String arg1, String arg2, String arg3){
+	    // Write code here that turns the phrase above into concrete actions
+		assertThat(Double.valueOf(listVar.get(arg1)),equalTo(Double.valueOf(listVar.get(arg2))*Double.valueOf(arg3)));
 	}
 }

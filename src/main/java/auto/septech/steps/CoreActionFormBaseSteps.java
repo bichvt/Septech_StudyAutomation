@@ -187,6 +187,16 @@ public class CoreActionFormBaseSteps extends EndUserBaseSteps {
     
 	/*************************combobox/listbox************************************************/
 	@Step
+	public void select_value_variable_label_from_drop_down_list( String variable, String element) {
+		mainActionForm.selectTextFromDropDownList(listVar.get(variable),element);
+	}
+
+	@Step
+	public void select_value_variable_value_from_drop_down_list(String variable, String element) {
+		mainActionForm.selectValueFromDropDownList(listVar.get(variable),element);
+	}
+	
+	@Step
 	public void select_label_from_drop_down_list( String visibleLabel, String element) {
 		mainActionForm.selectTextFromDropDownList(visibleLabel,element);
 	}

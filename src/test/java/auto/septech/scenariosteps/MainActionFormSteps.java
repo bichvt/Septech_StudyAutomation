@@ -143,6 +143,16 @@ public class MainActionFormSteps {
 		mainActionFormSteps.uncheck_checkbox(element);
 	}
 
+	@When("^select value of variable \"([^\"]*)\" from the label from  the drop down \"([^\"]*)\"$")
+	public void select_value_of_variable_from_label_from_drop_down_list(String variable, String element) throws Throwable {
+		mainActionFormSteps.select_value_variable_label_from_drop_down_list(variable,element);
+	}
+
+	@When("^select value of variable \"([^\"]*)\" from the value from the drop down \"([^\"]*)\"$")
+	public void select_value_of_variable_from_value_from_drop_down_list(String variable, String element) throws Throwable {
+		mainActionFormSteps.select_value_variable_value_from_drop_down_list(variable,element);
+	}
+	
 	@When("^select the label \"([^\"]*)\" from  the drop down \"([^\"]*)\"$")
 	public void select_label_from_drop_down_list(String visibleLabel, String element) throws Throwable {
 		mainActionFormSteps.select_label_from_drop_down_list(visibleLabel,element);

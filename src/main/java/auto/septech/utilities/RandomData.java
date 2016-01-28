@@ -2,7 +2,9 @@ package auto.septech.utilities;
 
 import java.util.Random;
 
-public class RandomData {
+import auto.septech.coreactions.PageCore;
+
+public class RandomData extends PageCore {
 
 	private static final char[] poolString = { 'a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F', 'g', 'G',
 			'h', 'H', 'i', 'I', 'j', 'J', 'k', 'K', 'l', 'L', 'm', 'M', 'n', 'N', 'o', 'O', 'p', 'P', 'q', 'Q', 'r',
@@ -191,6 +193,7 @@ public class RandomData {
 		}
 		else
 			retValue=value;
+		retValue=getActualValueFromObjectRepository(retValue);
 		return retValue;
 	}
 }

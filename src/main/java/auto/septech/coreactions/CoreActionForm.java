@@ -100,7 +100,7 @@ public class CoreActionForm extends PageCore {
 		WebElement onElement = element(getWebElement(element));
 		((JavascriptExecutor)getDriver()).executeScript("arguments[0].click();", onElement);
 	}
-	
+
 	/**
 	 * press down arrow key
 	 */
@@ -331,18 +331,13 @@ public class CoreActionForm extends PageCore {
 	 * drag and drop
 	 * @param resouce
 	 * @param dest
-	 */
-	public void dragAndDropElement(String resouce, String dest) {
-
+	 */	
+	public void dragAndDropElement(String resouce, String dest) {		
+		Actions dragAndDrop = new Actions(getDriver());
 		WebElement elementToMove = getWebElement(resouce);
-		Actions builder = new Actions(getDriver());
-		Action drag = builder.clickAndHold(elementToMove).build();
-		drag.perform();
-
-		WebElement moveToElement = getWebElement(dest);
-		Actions builder2 = new Actions(getDriver());
-		Action dragAndDrop = builder2.moveToElement(moveToElement).release(moveToElement).build();
-		dragAndDrop.perform();
+		WebElement moveToElement =  getWebElement(dest);
+        Action action = dragAndDrop.dragAndDrop(elementToMove, moveToElement).build();
+        action.perform();
 	}
 
 	/**

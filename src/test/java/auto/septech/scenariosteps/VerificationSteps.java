@@ -286,7 +286,22 @@ public class VerificationSteps {
 	}
 	
 	@Then("^the variable \"([^\"]*)\" should be equal variable \"([^\"]*)\" plus (\\d+)$")
-	public void the_variable_should_be_equal_variable_plus(String arg1, String arg2, int arg3) throws Throwable {
+	public void the_variable_should_be_equal_variable_plus(String arg1, String arg2, double arg3) throws Throwable {
 		verificationSteps.the_variable_should_be_equal_variable_plus(arg1,arg2,arg3);
+	}
+	
+	@Then("^the variable \"([^\"]*)\" should be equal variable \"([^\"]*)\" minus (\\d+)$")
+	public void the_variable_should_be_equal_variable_minus(String arg1, String arg2, double arg3) throws Throwable {
+		verificationSteps.the_variable_should_be_equal_variable_minus(arg1,arg2,arg3);
+	}
+	
+	@Then("^the variable \"([^\"]*)\" should be equal variable \"([^\"]*)\" div (\\d+)$")
+	public void the_variable_should_be_equal_variable_div(String arg1, String arg2, double arg3) throws Throwable {
+		verificationSteps.the_variable_should_be_equal_variable_div(arg1,arg2,arg3);
+	}
+	
+	@Then("^the variable \"([^\"]*)\" should be equal variable \"([^\"]*)\" multiply \"([^\"]*)\"$")
+	public void the_variable_should_be_equal_variable_multiply(String arg1, String arg2, String arg3) throws Throwable {
+		verificationSteps.the_variable_should_be_equal_variable_multiply(arg1,arg2,arg3);
 	}
 }
