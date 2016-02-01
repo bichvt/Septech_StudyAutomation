@@ -128,6 +128,12 @@ public class EndUserBaseSteps extends ScenarioSteps {
 	}
 
 	@Step
+	public void store_the_value_of_attribute_in_variable(String attr, String element, String var){
+		String value = pageCore.getAttribute(attr,element);
+    	listVar.put(var, value);
+	}
+	
+	@Step
 	public void store_text_value_in_variable(String text, String var){
 		randomData = new RandomData();
 		text=randomData.processRandomCucumber(text);

@@ -53,6 +53,11 @@ public class OtherBaseSteps {
 		endUser.store_the_result_of_minus_between_variable(var1, var2,varResult);
 	}
 	
+	@When("^store the value of attribute \"(.*?)\" of element \"(.*?)\" in \"(.*?)\" variable$")
+	public void store_the_value_of_attribute_in_variable(String attr, String element, String var){
+		endUser.store_the_value_of_attribute_in_variable(attr,element, var);
+	}
+	
 	@When("^store the text \"(.*?)\" in \"(.*?)\" variable$")
 	public void store_text_value_in_variable(String text, String var){
 		endUser.store_text_value_in_variable(text, var);
