@@ -6,6 +6,7 @@ import auto.septech.steps.FileActionBaseSteps;
 import auto.septech.steps.CoreActionFormBaseSteps;
 import auto.septech.steps.VerificationBaseSteps;
 import auto.septech.steps.WindowAndFrameBaseSteps;
+import auto.septech.utilities.TestLogger;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
@@ -36,6 +37,11 @@ public class OtherBaseSteps {
 	@When("^wait for (\\d+) seconds$")
 	public void wait_for_seconds(int time) throws Throwable {
 	   Thread.sleep(time*1000);
+	}
+	
+	@When("^store the date \"([^\"]*)\" of timezone \"([^\"]*)\" in variable \"([^\"]*)\"$")
+	public void store_date_in_variable(String format,String local, String var){
+		endUser.store_date_in_variable(format, local, var);
 	}
 	
 	@When("^store the result of jquery \"([^\"]*)\" in variable \"([^\"]*)\"$")

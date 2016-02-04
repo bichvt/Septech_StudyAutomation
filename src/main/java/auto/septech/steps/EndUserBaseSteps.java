@@ -12,6 +12,7 @@ import net.thucydides.core.steps.ScenarioSteps;
 import org.apache.commons.io.FileUtils;
 import auto.septech.coreactions.DialogAndAlert;
 import auto.septech.coreactions.CoreActionForm;
+import auto.septech.coreactions.DateTime;
 import auto.septech.coreactions.ManageFileAction;
 import auto.septech.coreactions.PageCore;
 import auto.septech.coreactions.WindowsAndFrames;
@@ -31,6 +32,7 @@ public class EndUserBaseSteps extends ScenarioSteps {
 	ManageFileAction manageFileAction;
 	WindowsAndFrames windowsAndFrames;
 	RandomData randomData;
+	DateTime dateTime = new DateTime();
 	ConnectDatabase connectDatabase = new ConnectDatabase();
     public static HashMap<String, String> listVar = new HashMap<String, String>();
     @Step
@@ -102,6 +104,15 @@ public class EndUserBaseSteps extends ScenarioSteps {
 	public String get_substring_in_string(String value, String beginStr, String endStr){
 		String subString = value.substring(value.indexOf(beginStr), value.indexOf(endStr)-1).trim();
 		return subString;
+	}
+	
+	@Step
+	public void store_date_in_variable(String format,String local, String var){
+		if(local==null || local.isEmpty()){
+			local="Japan";
+		}
+		listVar.put(var, dateTime.getCurrentDate(format,local));
+		TestLogger.info(listVar.get(var));
 	}
 	
 	@Step
