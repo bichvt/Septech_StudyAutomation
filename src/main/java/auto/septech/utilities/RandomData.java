@@ -164,6 +164,7 @@ public class RandomData extends PageCore {
 	 */
 	public String processRandomCucumber(String value){
 		String retValue="";
+		value=getActualValueFromObjectRepository(value);
 		if(value.trim().startsWith("{")){
 			Integer lenght=value.split(":").length;
 			Integer index=1;
@@ -193,7 +194,6 @@ public class RandomData extends PageCore {
 		}
 		else
 			retValue=value;
-		retValue=getActualValueFromObjectRepository(retValue);
 		return retValue;
 	}
 }
