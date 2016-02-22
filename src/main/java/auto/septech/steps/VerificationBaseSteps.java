@@ -94,7 +94,6 @@ public class VerificationBaseSteps extends EndUserBaseSteps {
 
 	@Step
 	public void the_text_element_should_be(String element, String value) {
-		pageCore.waitForTextToAppear(element,pageCore.getActualValueFromObjectRepository(value));
 		assertThat(pageCore.getCurrentTextOfElement(element),equalTo(pageCore.getActualValueFromObjectRepository(value)));
 	}
 

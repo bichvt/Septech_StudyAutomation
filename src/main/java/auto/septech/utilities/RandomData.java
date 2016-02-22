@@ -123,7 +123,7 @@ public class RandomData extends PageCore {
 	 * @return random numbers
 	 */
 	public String getRandomNumber(Integer number) {
-		char[] chars = "0123456789".toCharArray();
+		char[] chars = "123456789".toCharArray();
 		StringBuilder sb = new StringBuilder();
 		Random random = new Random();
 		for (int i = 0; i < number; i++) {

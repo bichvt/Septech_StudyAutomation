@@ -761,7 +761,7 @@ public class TestLinkBase {
 			ActionOnDuplicate actionOnDuplicatedName){
 		TestLogger.info("Create test case "+testCaseName+" on project "+projectName+"/"+planName+"/"+testSuiteId+" on testlink");
 		Integer testProjectId = api.getTestProjectByName(projectName).getId();
-		api.createTestCase(testCaseName, testSuiteId, testProjectId, System.getProperty("user.name"), summary, null, null, importance, execution, null, null, true, actionOnDuplicatedName);
+		api.createTestCase(testCaseName, testSuiteId, testProjectId, "phuong_dt", summary, null, null, importance, execution, null, null, true, actionOnDuplicatedName);
 	}
 
 	/**
