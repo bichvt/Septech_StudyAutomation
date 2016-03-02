@@ -215,10 +215,9 @@ public class EndUserBaseSteps extends ScenarioSteps {
 	public void store_number_of_result_of_query(String myQueries, String var) {
 		try {
 			ResultSet rs = connectDatabase.executeQuery(myQueries);
-			rs.last();
-			Integer size = rs.getRow();
-			rs.beforeFirst();
-			listVar.put(var, String.valueOf(size));
+			if(rs.next()) { 
+				listVar.put(var, String.valueOf(rs.getString(1)));
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

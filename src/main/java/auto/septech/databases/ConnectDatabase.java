@@ -52,7 +52,9 @@ public class ConnectDatabase {
 
 			// STEP 3: Open a connection
 			//DB_URL=DB_URL+dbName;
+			TestLogger.info("connect database");
 			conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+			TestLogger.info(conn.toString());
 
 			// STEP 4: Execute a query
 			stmt = conn.createStatement();

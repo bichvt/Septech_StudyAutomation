@@ -101,6 +101,11 @@ public class CoreActionFormBaseSteps extends EndUserBaseSteps {
 	}
 	
 	@Step
+	public void press_up_arrow_key(){
+		mainActionForm.pressUpArrowKey();
+	}
+	
+	@Step
 	public void press_enter_key(){
 		mainActionForm.pressEnterKey();
 	}

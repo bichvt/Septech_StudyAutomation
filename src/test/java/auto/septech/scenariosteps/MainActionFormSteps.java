@@ -62,6 +62,11 @@ public class MainActionFormSteps {
 	public void press_down_arrow_key() throws Throwable {
 		mainActionFormSteps.press_down_arrow_key();
 	}
+	
+	@When("^press up arrow key$")
+	public void press_down_up_key() throws Throwable {
+		mainActionFormSteps.press_up_arrow_key();
+	}
 
 	@When("^press enter key$")
 	public void press_enter_key() throws Throwable {

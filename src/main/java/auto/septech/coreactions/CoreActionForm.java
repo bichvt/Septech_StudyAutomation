@@ -109,6 +109,15 @@ public class CoreActionForm extends PageCore {
 		action.sendKeys(Keys.ARROW_DOWN).perform();
 		action.release();
 	}
+	
+	/**
+	 * press up arrow key
+	 */
+	public void pressUpArrowKey(){
+		Actions action=new Actions(getDriver());
+		action.sendKeys(Keys.ARROW_UP).perform();
+		action.release();
+	}
 
 	/**
 	 * press enter key
