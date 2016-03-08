@@ -54,12 +54,16 @@ public class CucumberUtil {
 		}
 		for (int i = 1; i < tempString.length; i++) {
 			String temp = tempString[i].toLowerCase().trim();
-			if (temp.startsWith("#")) {
+			if (temp.contains("store the result of jquery")) {
+				tempString[i] = "\tWhen " + tempString[i].trim();
+			} else if (temp.startsWith("#")) {
 				tempString[i] = tempString[i].trim();
 			} else if (temp.startsWith("@")) {
 				tempString[i] = tempString[i].trim();
 			} else if (temp.contains("scenario") || (temp.contains("background")) || (temp.contains("feature"))) {
 				tempString[i] = tempString[i].trim();
+			} else if (temp.contains("store")) {
+				tempString[i] = "\tWhen " + tempString[i].trim();
 			} else if (temp.startsWith("follow")) {
 				tempString[i] = "\tWhen " + tempString[i].trim();
 			} else if (temp.startsWith("open")) {
