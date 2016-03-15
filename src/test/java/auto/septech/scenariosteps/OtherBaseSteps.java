@@ -49,6 +49,11 @@ public class OtherBaseSteps {
 		endUser.store_result_of_jquery(jquery.replace("@", "\""), var);
 	}
 	
+	@When("^store the result of plus string between variable \"([^\"]*)\" and variable \"([^\"]*)\" in variable \"([^\"]*)\"$")
+	public void store_the_result_of_plus_string_variables(String var1, String var2, String vardes){
+		endUser.store_plus_variable_string_the_in_variable(var1, var2, vardes);
+	}
+	
 	@When("^store the sub text of variable \"(.*?)\" from index (\\d+) to index (\\d+) in \"(.*?)\" variable$")
 	public void store_the_sub_text_of_variable_by_index_in_variable(String srcvar, Integer beginStr, Integer endStr, String desvar) {
 		endUser.store_the_sub_text_of_variable_by_index_in_variable(srcvar, beginStr,  endStr, desvar);

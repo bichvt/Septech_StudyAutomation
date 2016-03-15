@@ -116,6 +116,15 @@ public class EndUserBaseSteps extends ScenarioSteps {
 	}
 	
 	@Step
+	public void store_plus_variable_string_the_in_variable(String srcvar1, String srcvar2, String desvar) {
+		String src1=listVar.get(srcvar1);
+		String src2=listVar.get(srcvar2);
+		String result = src1+src2;
+		listVar.put(desvar, result);
+		TestLogger.info(listVar.get(desvar));
+	}
+	
+	@Step
 	public void store_the_sub_text_of_variable_by_index_in_variable(String srcvar, Integer beginStr, Integer endStr, String desvar) {
 		String text=listVar.get(srcvar);
 		String subString = get_substring_in_string_by_index(text,beginStr, endStr);
