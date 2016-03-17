@@ -107,11 +107,20 @@ public class EndUserBaseSteps extends ScenarioSteps {
 	}
 	
 	@Step
-	public void store_date_in_variable(String format,String local, String var){
+	public void store_current_date_in_variable(String format,String local, String var){
 		if(local==null || local.isEmpty()){
 			local="Japan";
 		}
 		listVar.put(var, dateTime.getCurrentDate(format,local));
+		TestLogger.info(listVar.get(var));
+	}
+	
+	@Step
+	public void store_date_in_variable(Integer gap,String format,String local, String var){
+		if(local==null || local.isEmpty()){
+			local="Japan";
+		}
+		listVar.put(var, dateTime.getDate(gap,format,local));
 		TestLogger.info(listVar.get(var));
 	}
 	

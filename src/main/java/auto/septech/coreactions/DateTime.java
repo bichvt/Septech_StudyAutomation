@@ -8,6 +8,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
+import org.apache.commons.lang.time.DateUtils;
+
 public class DateTime {
 	/**
 	 * Get date by text format
@@ -73,7 +75,7 @@ public class DateTime {
 		int minute = cal.get(Calendar.HOUR);
 		return (minute); 
 	}
-	
+
 	/**
 	 * function get current Date of system follow a format
 	 * @param format
@@ -84,6 +86,7 @@ public class DateTime {
 		Date date = new Date();
 		return (dateFormat.format(date)); 
 	}
+
 	/**
 	 * Get current date with time zone
 	 * @param format
@@ -96,6 +99,40 @@ public class DateTime {
 		df.setTimeZone(TimeZone.getTimeZone(local));
 		info("Date and time in"+local+": " + df.format(date));
 		return df.format(date);
+	}
+
+	/** Get date in format "dd"
+	 * @param gap distance from current date
+	 * @return date in format "dd"
+	 */
+	public String getDate(int gap, String format,String local){
+		DateFormat df = new SimpleDateFormat(format);
+		Date now = new Date();
+		Date date = DateUtils.addDays(now, gap);
+		df.setTimeZone(TimeZone.getTimeZone(local));
+		info("Date and time in "+local+": " + df.format(date));
+		return df.format(date);
+	}
+
+	/**
+	 * Add time to Current date time
+	 * @param number
+	 * @param typeOfTime
+	 * @param format
+	 * @return
+	 */
+	public String addTimeToCurrentDateTime(int number, int typeOfTime, String format,String local){
+		DateFormat df = new SimpleDateFormat(format);
+		Calendar cal = Calendar.getInstance();
+		switch (typeOfTime) {
+		case 1: cal.add(Calendar.SECOND,number); break;
+		case 2:  cal.add(Calendar.MINUTE, number); break;
+		case 3: cal.add(Calendar.HOUR,number); break;
+		case 4: cal.add(Calendar.DAY_OF_MONTH,number); break;
+		default: cal.add(Calendar.MINUTE, number); break;
+		}
+		info("Date and time in"+local+": " + df.format(cal));
+		return df.format(cal);
 	}
 
 	/**
@@ -111,17 +148,6 @@ public class DateTime {
 		return (dateFormat.format(cal.getTime()));	
 	}
 
-	/** Get date in format "dd"
-	 * @param gap distance from current date
-	 * @return date in format "dd"
-	 */
-	public String getDate(int gap, String format){
-		DateFormat dateFormat = new SimpleDateFormat(format);
-		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.DAY_OF_MONTH, gap);
-		info(dateFormat.format(cal.getTime()));
-		return (dateFormat.format(cal.getTime()));	
-	}
 	/**
 	 * Get date from firstDayOf Week
 	 * @param gap
@@ -157,17 +183,17 @@ public class DateTime {
 	 * @return date
 	 */
 	public String getDayOfNextMonth(String format,int dayNum,int weekNum){
-	   DateFormat dateFormat = new SimpleDateFormat(format);
-	   Calendar calendar = Calendar.getInstance();
-	   
-	   Calendar nextMonth = Calendar.getInstance();
-	   nextMonth.setTime(calendar.getTime());
-	   nextMonth.add(Calendar.DAY_OF_WEEK_IN_MONTH,weekNum);
-	   nextMonth.add(Calendar.DAY_OF_MONTH,dayNum);
-	   String dayOfNextMonth= dateFormat.format( nextMonth.getTime());
-	   info("dayOfNextMonth:"+dayOfNextMonth);
-	   return dayOfNextMonth;
-	 
+		DateFormat dateFormat = new SimpleDateFormat(format);
+		Calendar calendar = Calendar.getInstance();
+
+		Calendar nextMonth = Calendar.getInstance();
+		nextMonth.setTime(calendar.getTime());
+		nextMonth.add(Calendar.DAY_OF_WEEK_IN_MONTH,weekNum);
+		nextMonth.add(Calendar.DAY_OF_MONTH,dayNum);
+		String dayOfNextMonth= dateFormat.format( nextMonth.getTime());
+		info("dayOfNextMonth:"+dayOfNextMonth);
+		return dayOfNextMonth;
+
 	}
 	/**
 	 * Get the day of next year
@@ -176,16 +202,16 @@ public class DateTime {
 	 * @return dayOfYear
 	 */
 	public String getDayOfNextYear(String format,int year){
-	   DateFormat dateFormat = new SimpleDateFormat(format);
-	   Calendar calendar = Calendar.getInstance();
-	   
-	   Calendar nextYear = Calendar.getInstance();
-	   nextYear.setTime(calendar.getTime());
-	   nextYear.add(Calendar.YEAR,year);
-	   nextYear.add(Calendar.MONTH,12);
-	   String dayOfYear= dateFormat.format(nextYear.getTime());
-	   info("dayOfYear:"+dayOfYear);
-	   return dayOfYear;
+		DateFormat dateFormat = new SimpleDateFormat(format);
+		Calendar calendar = Calendar.getInstance();
+
+		Calendar nextYear = Calendar.getInstance();
+		nextYear.setTime(calendar.getTime());
+		nextYear.add(Calendar.YEAR,year);
+		nextYear.add(Calendar.MONTH,12);
+		String dayOfYear= dateFormat.format(nextYear.getTime());
+		info("dayOfYear:"+dayOfYear);
+		return dayOfYear;
 	}
 	/**
 	 * Get the day of next week
@@ -193,18 +219,18 @@ public class DateTime {
 	 * @return
 	 */
 	public String getDayOfNextWeek(String format){
-	   DateFormat dateFormat = new SimpleDateFormat(format);
-	   Calendar calendar = Calendar.getInstance();
-	   String dayOfNextMonth1= dateFormat.format(  calendar.getTime());
-	   info("dayOfNextMonth1:"+dayOfNextMonth1);
-	   
-	   Calendar nextWeek = Calendar.getInstance();
-	   nextWeek.setTime(calendar.getTime());
-	   nextWeek.add(Calendar.DATE,7);
-	   String dayOfNextWeek= dateFormat.format(nextWeek.getTime());
-	   return dayOfNextWeek;
-		 
-		}
+		DateFormat dateFormat = new SimpleDateFormat(format);
+		Calendar calendar = Calendar.getInstance();
+		String dayOfNextMonth1= dateFormat.format(  calendar.getTime());
+		info("dayOfNextMonth1:"+dayOfNextMonth1);
+
+		Calendar nextWeek = Calendar.getInstance();
+		nextWeek.setTime(calendar.getTime());
+		nextWeek.add(Calendar.DATE,7);
+		String dayOfNextWeek= dateFormat.format(nextWeek.getTime());
+		return dayOfNextWeek;
+
+	}
 	/**
 	 * Get the number of current week
 	 * @return weekNum
@@ -214,7 +240,7 @@ public class DateTime {
 		calendar.setTime(new Date());
 		return calendar.get(Calendar.DAY_OF_WEEK);
 	}
-	
+
 	/**
 	 * Get day
 	 * @return

@@ -39,9 +39,14 @@ public class OtherBaseSteps {
 	   Thread.sleep(time*1000);
 	}
 	
-	@When("^store the date \"([^\"]*)\" of timezone \"([^\"]*)\" in variable \"([^\"]*)\"$")
-	public void store_date_in_variable(String format,String local, String var){
-		endUser.store_date_in_variable(format, local, var);
+	@When("^store the date distance current date \"([^\"]*)\" days in format \"([^\"]*)\" of timezone \"([^\"]*)\" in variable \"([^\"]*)\"$")
+	public void store_date_in_variable(String gap, String format,String local, String var){
+		endUser.store_date_in_variable(Integer.valueOf(gap), format, local, var);
+	}
+	
+	@When("^store the current date \"([^\"]*)\" of timezone \"([^\"]*)\" in variable \"([^\"]*)\"$")
+	public void store_current_date_in_variable(String format,String local, String var){
+		endUser.store_current_date_in_variable(format, local, var);
 	}
 	
 	@When("^store the result of jquery \"([^\"]*)\" in variable \"([^\"]*)\"$")
