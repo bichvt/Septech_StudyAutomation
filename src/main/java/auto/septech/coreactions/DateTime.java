@@ -96,7 +96,8 @@ public class DateTime {
 	public String getCurrentDate(String format,String local){
 		DateFormat df = new SimpleDateFormat(format);
 		Date date = new Date();
-		df.setTimeZone(TimeZone.getTimeZone(local));
+		if(local==null || local.isEmpty())
+			df.setTimeZone(TimeZone.getTimeZone(local));
 		info("Date and time in"+local+": " + df.format(date));
 		return df.format(date);
 	}
