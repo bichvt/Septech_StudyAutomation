@@ -23,6 +23,19 @@ public class DialogAndAlertBaseSteps extends EndUserBaseSteps {
 	ManageFileAction manageFileAction;
 	RandomData randomString;
 	WindowsAndFrames windowsAndFrames;
+	
+	@Step
+	public void verify_alert_message_then_accept_alert(String msg){
+		String retMsg=dialogsAndAlert.verifyalertandacceptAlertWithoutClickElement();
+		assertThat(retMsg,containsString(pageCore.getActualValueFromObjectRepository(msg)));
+	}
+	
+	@Step
+	public void verify_alert_message_then_dismiss_alert(String msg){
+		String retMsg=dialogsAndAlert.verifyalertanddismissAlertWithoutClickElement();
+		assertThat(retMsg,containsString(pageCore.getActualValueFromObjectRepository(msg)));
+	}
+	
 	@Step
 	public void verify_alert_message_contain_text_then_accept_alert(String element, String msg){
 		String retMsg=dialogsAndAlert.getAlertMessageThenAccept(element);

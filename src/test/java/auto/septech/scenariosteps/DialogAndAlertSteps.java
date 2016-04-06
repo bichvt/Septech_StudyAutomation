@@ -29,6 +29,16 @@ public class DialogAndAlertSteps {
 	@Steps
 	WindowAndFrameBaseSteps windowsAndFramesSteps;
 	
+	@When("^alert popup should be message \"(.*?)\" then accept alert$")
+	public void accept_alert(String msg) throws Throwable {
+		dialogAndAlertSteps.verify_alert_message_then_accept_alert(msg);
+	}
+	
+	@When("^alert popup should be message \"(.*?)\" then dismiss alert$")
+	public void dismiss_alert(String msg) throws Throwable {
+		dialogAndAlertSteps.verify_alert_message_then_dismiss_alert(msg);
+	}
+	
 	@When("^click on the element \"(.*?)\" and accept the alert popup$")
 	public void accept_the_currently_displayed_dialog(String element) throws Throwable {
 		dialogAndAlertSteps.accept_alert(element);

@@ -34,6 +34,28 @@ public class DialogAndAlert extends PageCore{
 	
 	/**
 	 * Accept Alert
+	 * @return
+	 */
+	public String verifyalertandacceptAlertWithoutClickElement() {
+		waitForAlert();
+		String retMsg=getAlert().getText();
+		getAlert().accept();
+		return retMsg;
+	}
+	
+	/**
+	 * Accept Alert
+	 * @return
+	 */
+	public String verifyalertanddismissAlertWithoutClickElement() {
+		waitForAlert();
+		String retMsg=getAlert().getText();
+		getAlert().dismiss();
+		return retMsg;
+	}
+	
+	/**
+	 * Accept Alert
 	 * @param element
 	 */
 	public void acceptAlert(String element) {

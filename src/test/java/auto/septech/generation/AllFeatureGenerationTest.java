@@ -16,7 +16,7 @@ public class AllFeatureGenerationTest {
 		TestLinkBase genFile = new TestLinkBase();
 		genFile.getSystemProperty();
 		TestLinkAPI testLinkApi = genFile.connectTestLink(TestLinkBase.url,TestLinkBase.devKey);
-		File backUpFile = new File(TestLinkBase.pathFeature+CucumberUtil.getCurrentDate("yyyyMMDDHHmm")+"features/");
+		File backUpFile = new File(TestLinkBase.pathFeature+"/backup/"+CucumberUtil.getCurrentDate("yyyyMMDDHHmm")+"features/");
 		File sourceFile = new File(TestLinkBase.pathFeature+"features/");
 		CucumberUtil.copyDirectoryToDirectory(sourceFile,backUpFile);
 		CucumberUtil.deleteDirectory(sourceFile);

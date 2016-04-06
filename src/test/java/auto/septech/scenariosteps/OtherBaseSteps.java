@@ -6,7 +6,6 @@ import auto.septech.steps.FileActionBaseSteps;
 import auto.septech.steps.CoreActionFormBaseSteps;
 import auto.septech.steps.VerificationBaseSteps;
 import auto.septech.steps.WindowAndFrameBaseSteps;
-import auto.septech.utilities.TestLogger;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;

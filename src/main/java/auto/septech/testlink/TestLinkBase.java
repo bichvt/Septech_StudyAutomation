@@ -776,7 +776,7 @@ public class TestLinkBase {
 		String suiteName=getTestSuiteById(api,suiteId).getName();
 		String fs = File.separator;
 		try {
-			File backUpFile = new File(pathFile+CucumberUtil.getCurrentDate("yyyyMMDDHHmm")+"objects/");
+			File backUpFile = new File(pathFile+"/backup/"+CucumberUtil.getCurrentDate("yyyyMMDDHHmm")+"objects/");
 			File sourceFile = new File(pathFile+"objects/");
 			CucumberUtil.copyDirectoryToDirectory(sourceFile,backUpFile);
 			CucumberUtil.deleteDirectory(sourceFile);

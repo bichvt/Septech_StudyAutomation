@@ -10,9 +10,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.MoveTargetOutOfBoundsException;
 
 import auto.septech.utilities.TestLogger;
-import net.thucydides.core.annotations.findby.By;
 
-@SuppressWarnings("deprecation")
 public class WindowsAndFrames extends PageCore{
 	/**
 	 * maximize windows
