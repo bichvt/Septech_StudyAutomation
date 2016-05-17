@@ -1,0 +1,24 @@
+================== Bài tập cho Locator ==================
+Link: http://live.guru99.com/index.php/mobile.html
+Vào link live.guru99.com -> Chọn tab “Mobile” -> Chọn một sản phẩm để “Add to cart” -> Click “Continue shopping” -> Chọn một sản phẩm khác để add to cart
+Tìm locator của các element trên trang:
+
+1. Giá trị price của 1 sản phẩm bất kì(chon sản phẩm là SamSungGalaxy)::
+   Price_SamSungGalaxy = xpath = //span[@class='price' and text()='$130.00']
+   
+2. Textbox “qty” của một sản phẩm bất kỳ(chon sản phẩm là SamSungGalaxy):
+   Qty_SamSungGalaxy = xpath = //*[@id='shopping-cart-table']/tbody/tr[1]/td[4]/input
+ 
+3. Button “delete” một sản phẩm bất kỳ(chon sản phẩm là SamSungGalaxy)::
+   Delete_button = By.className('btn-remove btn-remove2')
+or Delete_button= xpath= //a[@class='btn-remove btn-remove2']
+or Delete_button= xpath = //a[@title='Remove Item']
+or Delete_button= xpath = //a[contains(@title,'Remove Item')]
+
+4. Một option “country” từ combo box( tôi chọn Angola):
+   Country_Angola = xpath = //select[@id='country']//option[7]
+or Country_Angola = xpath = //select[@id='country']//option[@value='AO']
+or Country_Angola = xpath = //select[@name='country_id']//option[7]
+or Country_Angola = xpath = //select[@name='country_id']//option[@value='AO']
+or Country_Angola = By.id('country')
+or CCountry_Angola = By.name('country_id')
