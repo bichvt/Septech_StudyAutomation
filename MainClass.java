@@ -12,7 +12,6 @@ public static void main(String[] args){
     x = in.nextInt();
     System.out.println("Nhap so thu hai:");
     y = in.nextInt();
-    System.out.println("Phep cong hai so:");
     sh.PhepCong(x, y);
     sh.PhepTru(x, y);
     sh.PhepNhan(x, y);
